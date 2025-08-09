@@ -368,10 +368,18 @@ details[open] {
   transform: translateY(-4px);
 }
 .offer h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* відстань між іконкою та текстом */
+  margin: 0 0 10px 0;
   font-size: 18px;
-  color: #222;
-  margin-bottom: 10px;
+  font-weight: bold;
   line-height: 1.4;
+}
+
+.offer h3 span.icon {
+  font-size: 1.4em; /* розмір емодзі або іконки */
+  flex-shrink: 0;   /* щоб іконка не стискалась */
 }
 .offer p {
   font-size: 15px;
@@ -438,6 +446,93 @@ img {
   max-width: 100%;
   height: auto;
 }
+.hero{
+  text-align:center;
+  padding:48px 20px 36px;
+}
+.hero-logo{
+  max-width:200px;
+  display:block;
+  margin:0 auto 18px;
+}
+.hero-title{
+  margin:0 0 18px;
+  font-size: clamp(24px, 5.5vw, 36px);
+  line-height:1.25;
+  font-weight: 800;
+  color:#111;
+}
+.hero-city{
+  color:#0057b7;
+  text-shadow: 0 0 6px rgba(0,87,183,.55), 0 0 14px rgba(0,87,183,.35);
+  background: linear-gradient(90deg, rgba(255,215,0,.25), rgba(0,87,183,.12));
+  padding: 0 .25em;
+  border-radius: .4em;
+}
+
+.cta-btn{
+  position:relative;
+  display:inline-block;
+  margin-top:10px;
+  padding:14px 26px;
+  border:none;
+  border-radius:12px;
+  font-size: clamp(15px, 4vw, 18px);
+  font-weight:800;
+  cursor:pointer;
+  color:#111;
+  background: linear-gradient(135deg,#ffd700 0%,#ffcf09 50%,#ffd700 100%);
+  box-shadow: 0 6px 18px rgba(255,215,0,.55), 0 2px 0 rgba(0,0,0,.05) inset;
+  overflow:hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.cta-btn:hover{ transform: translateY(-1px); box-shadow:0 10px 24px rgba(255,215,0,.6); }
+.cta-btn:active{ transform: translateY(0); }
+
+.cta-btn .shine{
+  content:"";
+  position:absolute;
+  top:0; left:-60%;
+  width:50%; height:100%;
+  background: linear-gradient(120deg, rgba(255,255,255,.0) 0%, rgba(255,255,255,.55) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-25deg);
+  animation: shine 2.2s linear infinite;
+}
+@keyframes shine{ 0%{ left:-60%; } 100%{ left:160%; } }
+
+/* accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .cta-btn .shine{ animation:none; display:none; }
+}
+.btn-send{
+  position:relative;
+  display:inline-block;
+  padding:14px 28px;
+  font-size:18px;
+  font-weight:800;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  color:#111;
+  background: linear-gradient(135deg,#ffd700 0%,#ffcf09 50%,#ffd700 100%);
+  box-shadow: 0 8px 22px rgba(255,215,0,.55), 0 2px 0 rgba(0,0,0,.06) inset;
+  transition: transform .18s ease, box-shadow .18s ease;
+  overflow:hidden;
+}
+.btn-send:hover{ transform: translateY(-1px); box-shadow:0 12px 28px rgba(255,215,0,.6); }
+.btn-send:active{ transform: translateY(0); }
+.btn-send::after{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse at 30% -50%, rgba(255,255,255,.55), transparent 60%);
+  opacity:.7; pointer-events:none;
+}
+
+/* мобільні піджими */
+@media (max-width:600px){
+  .hero{ padding:36px 14px 28px; }
+  .hero-logo{ max-width:150px; }
+}
 
 
    
@@ -492,13 +587,19 @@ img {
 </head>
 
 <body>
-<header>
-  <img src="logo.png" alt="Step by Step logo" style="max-width:300px; display:block; margin:0 auto 20px;">
-  <h1 style="color:var(--color-blue);">Step by Step</h1>
-  <p style="font-size:18px; text-align:center;">Ефективне вивчення англійської та польської мови у Вроцлаві</p>
- <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});">
-  Записатись на безкоштовне пробне заняття
-</button>
+<header class="hero" data-aos="fade-up">
+  <img src="logo.png" alt="Step by Step logo" class="hero-logo">
+
+  <h1 class="hero-title">
+    Ефективне вивчення англійської та польської мови у
+    <span class="hero-city">Вроцлаві</span>
+  </h1>
+
+  <button class="cta-btn"
+    onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+    Записатись на <u>безкоштовне</u> заняття
+    <span class="shine"></span>
+  </button>
 </header>
 <section id="offers" data-aos="fade-up" style="background: #ffffff; padding: 60px 20px;">
   <h2 style="text-align: center; font-size: 2rem; font-weight: bold; margin-bottom: 40px;">Наші курси</h2>
@@ -510,7 +611,7 @@ img {
     </div>
 
     <div class="offer" style="background: #e0f0ff; border-left: 6px solid #57a6ff;">
-      <h3>🧒 Step 2 — Англійська на 6 балів (9–11 років)</h3>
+      <h3> 🧒 Step 2 — Англійська на 6 балів (9–11 років)</h3>
       <p>Словниковий запас, граматика, слухання й говоріння — усе в одному курсі для школярів.</p>
     </div>
 
@@ -575,9 +676,6 @@ img {
         <li>✔ Позитивна атмосфера навчання</li>
       </ul>
     </div>
-    <div class="about-img">
-      <img src="https://cdn-icons-png.flaticon.com/512/2942/2942909.png" alt="Team of Teachers">
-    </div>
   </div>
 </section>
 <section class="faq-section" data-aos="fade-up">
@@ -601,46 +699,57 @@ img {
         <p>Усі наші викладачі мають сертифікати рівня C1–C2 та проходять регулярні тренінги.</p>
       </div>
     </div>
-    <div class="faq-item">
-      <button class="faq-question">Чи є знижки для братів і сестер?</button>
-      <div class="faq-answer">
-        <p>Так, для родин діють спеціальні знижки при записі двох і більше учнів.</p>
-      </div>
-    </div>
   </div>
 </section>
+<section id="contact" data-aos="fade-up" class="contact-section">
+  <h2 class="section-title">Зв'язатися з нами</h2>
+  <p class="contact-subtitle">Залиште заявку – і ми з вами зв'яжемось найближчим часом!!!</p>
+  <form class="contact-form">
+    <input type="text" name="name" placeholder="Ім'я та прізвище" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="tel" name="phone" placeholder="Телефон">
+    <textarea name="message" rows="4" placeholder="Коментар (обов'язково)"></textarea>
+    <button type="submit" class="btn-send">Надіслати</button>
+  </form>
 
+  <div class="social-links">
+    <a href="https://instagram.com/stepbystep" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
+      @stepbystep
+    </a>
+  </div>
+</section>
   <section class="testimonials-section" data-aos="fade-up">
   <h2 class="section-title">Відгуки наших клієнтів</h2>
   <div class="testimonials-grid">
 
     <div class="testimonial-card">
-      <div class="testimonial-header">
-        <img src="https://i.imgur.com/wV5Cz7y.png" alt="Софія Голоцван" class="avatar">
-        <div>
-          <strong>Софія Голоцван</strong><br>
-          <span class="subtitle">2 тижні тому</span>
-        </div>
-      </div>
-      <p class="stars">★★★★★</p>
-      <p class="feedback">Пані Світлана — це просто знахідка 😊 Щиро рекомендую її як неймовірну репетиторку з польської мови. Вона весела, доступно пояснює й завжди підтримає.</p>
+  <div class="testimonial-header">
+    <img src="unnamed.png" alt="Софія Голоцван" class="avatar">
+    <div>
+      <strong>Софія Голоцван</strong><br>
+      <span class="subtitle">2 тижні тому</span>
     </div>
+  </div>
+  <p class="stars">★★★★★</p>
+  <p class="feedback">Пані Світлана — це просто знахідка 😊 Щиро рекомендую її як неймовірну викладачку англійської мови. Вона весела, доступно пояснює й завжди підтримає. Завдяки її урокам я почала говорити англійською впевненіше вже за кілька тижнів.</p>
+</div>
+
+<div class="testimonial-card">
+  <div class="testimonial-header">
+    <img src="unnamed (1).png" alt="Alena Kirsanova" class="avatar">
+    <div>
+      <strong>Alena Kirsanova</strong><br>
+      <span class="subtitle">6 місяців тому</span>
+    </div>
+  </div>
+  <p class="stars">★★★★★</p>
+  <p class="feedback">Вчу англійську мову вже 8 місяців зі Світланою у школі Step by Step — чудовий викладач! Гарно пояснює, завжди підтримує, уроки цікаві та ефективні. Тепер я легко спілкуюсь з іноземцями.</p>
+</div>
 
     <div class="testimonial-card">
       <div class="testimonial-header">
-        <img src="https://i.imgur.com/tXVPQjY.png" alt="Alena Kirsanova" class="avatar">
-        <div>
-          <strong>Alena Kirsanova</strong><br>
-          <span class="subtitle">6 місяців тому</span>
-        </div>
-      </div>
-      <p class="stars">★★★★★</p>
-      <p class="feedback">Вчу польську мову вже 8 місяців зі Світланою у школі Step by Step — чудовий викладач! Гарно пояснює, завжди підтримує, і просто комфортна людина.</p>
-    </div>
-
-    <div class="testimonial-card">
-      <div class="testimonial-header">
-        <img src="https://i.imgur.com/U1pQp2O.png" alt="Вікторія Бай" class="avatar">
+        <img src="unnamed (2).png" alt="Вікторія Бай" class="avatar">
         <div>
           <strong>Viktoriia Bai</strong><br>
           <span class="subtitle">рік тому</span>
@@ -652,7 +761,7 @@ img {
 
     <div class="testimonial-card">
       <div class="testimonial-header">
-        <img src="https://i.imgur.com/4cM1C4d.png" alt="Олена Т." class="avatar">
+        <img src="unnamed (3).png" alt="Олена Т." class="avatar">
         <div>
           <strong>Олена Т.</strong><br>
           <span class="subtitle">новий відгук</span>
@@ -663,24 +772,7 @@ img {
     </div>
 
   </div>
-<section id="contact" data-aos="fade-up" class="contact-section">
-  <h2 class="section-title">Зв'язатися з нами</h2>
-  <p class="contact-subtitle">Залиште заявку – і ми з вами зв'яжемось найближчим часом</p>
-  <form class="contact-form">
-    <input type="text" placeholder="Ім'я та прізвище" required>
-    <input type="email" placeholder="Email" required>
-    <input type="tel" placeholder="Телефон">
-    <textarea rows="4" placeholder="Коментар або питання..."></textarea>
-    <button type="submit">Надіслати</button>
-  </form>
 
-  <div class="social-links">
-    <a href="https://instagram.com/stepbystep" target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram">
-      @stepbystep
-    </a>
-  </div>
-</section>
 
 <footer class="site-footer">
   <p>© 2025 Step by Step | Вроцлав, Pl. Solidarności 1/3/5, лок. 424</p>
@@ -697,6 +789,61 @@ img {
       faqItem.classList.toggle('active');
     });
   });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js" defer></script>
+<script defer>
+window.addEventListener('DOMContentLoaded', () => {
+  // 1) EmailJS init
+  emailjs.init("TzVjmgBT4lCRkRnVt"); // public key
+
+  // 2) Знайти форму на сторінці
+  const form = document.getElementById('contact-form') 
+            || document.querySelector('form#contact-form') 
+            || document.forms[0];
+
+  if (!form) {
+    console.error('contact-form not found');
+    return;
+  }
+
+  // 3) Підставити дані з URL (stepbystep.html?name=...&email=...&phone=...)
+  const params = new URLSearchParams(location.search);
+  if (params.get('name'))  form.name.value  = params.get('name');
+  if (params.get('email')) form.email.value = params.get('email');
+  if (params.get('phone')) form.phone.value = params.get('phone');
+   if (params.get('message')) form.message.value = params.get('message');
+
+  // 4) Відправка
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const btn = form.querySelector('.btn-send');
+    const original = btn.textContent;
+    btn.disabled = true; btn.textContent = 'Відправляю…';
+
+    const data = {
+      name:    form.name.value,
+      email:   form.email.value,
+      phone:   form.phone.value,
+      message: form.message.value || ''
+    };
+
+    try {
+      await emailjs.send("service_bnb08ij", "template_14fxmya", data);
+      btn.textContent = "Надіслано ✅";
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      btn.textContent = "Помилка, спробуйте ще раз!!";
+    } finally {
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = original;
+      }, 2000);
+    }
+  });
+});
 </script>
 </body>
 </html>
