@@ -562,7 +562,94 @@ button:hover, .btn-send:hover{
     background: #0044AA; /* насичений синій */
     color: #fff; /* білий текст для контрасту */
   }
-  
+  /* ===== Mobile polish for Stepiky & Values ===== */
+@media (max-width: 600px){
+  /* секція Stepiky */
+  #stepiky{
+    padding: 32px 14px !important;
+    background: linear-gradient(135deg, #ffd600 0%, #ffe36b 100%) !important;
+  }
+  #stepiky h2{
+    font-size: 1.4rem !important;
+    margin-bottom: 14px !important;
+    line-height: 1.2;
+  }
+  #stepiky p{
+    font-size: .98rem !important;
+    line-height: 1.55 !important;
+    margin-bottom: 18px !important;
+    text-align: left;           /* читабельніше на мобільному */
+  }
+  #stepiky .card{
+    padding: 14px !important;
+    border-radius: 12px !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,.08) !important;
+  }
+  /* грід у колонку, великий зазор для «дихання» */
+  #stepiky > div > div{
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+  /* емодзі в заголовках — компактніше */
+  #stepiky .card h3{
+    font-size: 1.02rem !important;
+    display: flex; align-items: center; gap: 8px;
+    margin: 0 0 6px;
+  }
+  #stepiky .card h3::before{
+    content: "⭐";
+    font-size: 1.15rem;
+    line-height: 1;
+  }
+
+  /* відступ від Stepiky до наступної секції */
+  #stepiky + #values{
+    margin-top: 28px !important;
+  }
+
+  /* секція Наші цінності */
+  #values{
+    padding: 32px 14px !important;
+    margin: 28px 12px 0 !important;    /* невеликий внутрішній відступ від країв */
+    border-width: 1.5px !important;    /* тонша рамка на мобільному */
+    border-radius: 12px !important;
+    background: #fff7c4 !important;    /* трохи контрастніше, ніж було */
+  }
+  #values h2{
+    font-size: 1.35rem !important;
+    margin-bottom: 12px !important;
+  }
+  #values p{
+    font-size: .98rem !important;
+    line-height: 1.55 !important;
+    text-align: left;
+    margin-bottom: 16px !important;
+  }
+  #values ul{
+    padding-left: 0 !important;
+    margin: 0 !important;
+  }
+  #values li{
+    font-size: .98rem !important;
+    line-height: 1.55 !important;
+    padding: 10px 12px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.05);
+    margin-bottom: 10px;
+    display: flex; gap: 8px; align-items: flex-start;
+  }
+  #values li::before{
+    content: "•";
+    color: #0a2a6b; font-weight: 900; margin-right: 6px;
+  }
+}
+
+/* легке зменшення руху для тих, хто не любить анімації */
+@media (prefers-reduced-motion: reduce){
+  #stepiky .card, .offer{ transition: none !important; animation: none !important; }
+}
 /* мобільні піджими */
 @media (max-width:600px){
   .hero{ padding:36px 14px 28px; }
@@ -949,4 +1036,5 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
