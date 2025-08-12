@@ -73,18 +73,12 @@ details[open] {
   overflow: hidden;
 }
 
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background: url('https://uploads.onecompiler.io/43tgbnnnx/43tgbbtw9/1000035550.png') center/contain no-repeat;
-  opacity: 0.08;
-  z-index: 0;
-}
-
 .hero-image {
   position: relative;
   z-index: 1;
   margin-bottom: 20px;
+  background: url('logo.png') center/contain no-repeat; /* локальний або GitHub шлях до логотипу */
+  display: inline-block; /* щоб фон обгортався по фото */
 }
 
 .hero-image img {
@@ -92,8 +86,9 @@ details[open] {
   border-radius: 20px;
   box-shadow: 0 16px 40px rgba(0,0,0,.18),
               0 0 0 6px rgba(255,214,0,.35);
+  position: relative;
+  z-index: 1; /* поверх лого */
 }
-
 .hero-title {
   position: relative;
   z-index: 1;
