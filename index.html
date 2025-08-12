@@ -87,10 +87,12 @@ details[open] {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 70%;
+  max-width: 90%; /* щоб повністю вміщався */
+  max-height: 90%;
   transform: translate(-50%, -50%);
-  opacity: 0.15; /* Прозорість логотипу */
-  pointer-events: none; /* Щоб не заважало клікам */
+  opacity: 0.15; /* прозорість */
+  object-fit: contain; /* щоб не обрізався */
+  pointer-events: none;
 }
 .cta-btn {
   position: relative;
@@ -1098,6 +1100,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
