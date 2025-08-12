@@ -66,53 +66,32 @@ summary {
 details[open] {
   background: #eef5ff;
 }
-.hero {
-  position: relative;
-  text-align: center;
-  padding: clamp(40px, 8vw, 80px) 20px;
-  overflow: hidden;
-}
-
 .hero-image {
   position: relative;
   display: inline-block;
   margin-bottom: 20px;
-  border-radius: 22px;
-}
-
-/* ЛОГО як “водяний знак” ПОВЕРХ фото */
-.hero-image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: url('logo.png') center/75% no-repeat; /* <- шлях до твого логотипу з репо */
-  opacity: 0.14;               /* підкрути 0.10–0.22 за смаком */
-  mix-blend-mode: multiply;    /* робить лого видимим на білому фоні фото */
-  pointer-events: none;
-  z-index: 2;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .hero-image img {
-  position: relative;
-  z-index: 1; /* під лого-оверлеєм */
   width: min(100%, 900px);
-  border-radius: 20px;
   display: block;
+  border-radius: 20px;
   box-shadow:
     0 16px 40px rgba(0,0,0,.18),
     0 0 0 6px rgba(255,214,0,.35);
 }
 
-.hero-title {
-  position: relative;
-  z-index: 3;
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 800;
-  margin: 12px 0;
+.logo-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  transform: translate(-50%, -50%);
+  opacity: 0.15; /* Прозорість логотипу */
+  pointer-events: none; /* Щоб не заважало клікам */
 }
-
-.hero-city { color: #0057b7; }
-
 .cta-btn {
   position: relative;
   z-index: 3;
@@ -130,16 +109,6 @@ details[open] {
     background-size: 92%;
     opacity: 0.16;
   }
-}
-.cta-btn {
-  position: relative;
-  z-index: 1;
-  background: #ffd600;
-  border: none;
-  border-radius: 48px;
-  padding: 14px 24px;
-  font-weight: 700;
-  cursor: pointer;
 }
 .contact-section {
   background: var(--color-light);
@@ -789,9 +758,11 @@ button:hover, .btn-send:hover{
   <div class="hero-bg"></div>
 
   <!-- Kids photo -->
+<header class="hero" data-aos="fade-up">
   <div class="hero-image">
     <img src="https://uploads.onecompiler.io/43tgbnnnx/43tgbvtkd/1000035549.png"
          alt="Учні Step by Step на уроці" loading="lazy">
+    <img class="logo-overlay" src="logo.png" alt="Step by Step logo">
   </div>
 
   <h1 class="hero-title">
@@ -802,8 +773,8 @@ button:hover, .btn-send:hover{
   <button class="cta-btn"
     onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
     Записатись на <u>безкоштовне</u> заняття
-    <span class="shine"></span>
   </button>
+</header>
 </header>
 <section id="offers" data-aos="fade-up" style="background: #ffffff; padding: 60px 20px;">
   <h2 style="text-align: center; font-size: 2rem; font-weight: bold; margin-bottom: 40px;">Наші курси</h2>
@@ -1127,5 +1098,6 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
