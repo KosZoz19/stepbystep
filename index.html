@@ -75,30 +75,61 @@ details[open] {
 
 .hero-image {
   position: relative;
-  z-index: 1;
+  display: inline-block;
   margin-bottom: 20px;
-  background: url('https://uploads.onecompiler.io/43tgbnnnx/43tgbbtw9/1000035550.png') center/contain no-repeat;/* локальний або GitHub шлях до логотипу */
-  display: inline-block; /* щоб фон обгортався по фото */
+  border-radius: 22px;
+}
+
+/* ЛОГО як “водяний знак” ПОВЕРХ фото */
+.hero-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url('logo.png') center/75% no-repeat; /* <- шлях до твого логотипу з репо */
+  opacity: 0.14;               /* підкрути 0.10–0.22 за смаком */
+  mix-blend-mode: multiply;    /* робить лого видимим на білому фоні фото */
+  pointer-events: none;
+  z-index: 2;
 }
 
 .hero-image img {
+  position: relative;
+  z-index: 1; /* під лого-оверлеєм */
   width: min(100%, 900px);
   border-radius: 20px;
-  box-shadow: 0 16px 40px rgba(0,0,0,.18),
-              0 0 0 6px rgba(255,214,0,.35);
-  position: relative;
-  z-index: 1; /* поверх лого */
+  display: block;
+  box-shadow:
+    0 16px 40px rgba(0,0,0,.18),
+    0 0 0 6px rgba(255,214,0,.35);
 }
+
 .hero-title {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   font-size: clamp(1.8rem, 4vw, 2.6rem);
   font-weight: 800;
   margin: 12px 0;
 }
 
-.hero-city {
-  color: #0057b7;
+.hero-city { color: #0057b7; }
+
+.cta-btn {
+  position: relative;
+  z-index: 3;
+  background: #ffd600;
+  border: none;
+  border-radius: 48px;
+  padding: 14px 24px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Мобільні налаштування: збільшуємо лого трохи */
+@media (max-width: 600px) {
+  .hero-image::after {
+    background-size: 92%;
+    opacity: 0.16;
+  }
 }
 .cta-btn {
   position: relative;
