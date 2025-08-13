@@ -503,6 +503,12 @@ img {
   padding: 0 .25em;
   border-radius: .4em;
 }
+   .highlight-free {
+  background: linear-gradient(90deg, #ff0000, #ff9900);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
 
 .cta-section {
   background: linear-gradient(135deg, #007BFF 0%, #0056d2 100%);
@@ -792,9 +798,11 @@ button:hover, .btn-send:hover{
 
 <section class="cta-section">
   <p>Безкоштовний урок чекає на вас! Залишіть заявку прямо зараз.</p>
-  <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-    Записатись на безкоштовне заняття!!
-  </button>
+ <button class="cta-btn"
+  onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+  Записатись на <span class="highlight-free">безкоштовне</span> заняття
+  <span class="shine"></span>
+</button>
 </section>
 <!-- Вступ -->
 <section id="intro" style="padding: 50px 20px; max-width: 1000px; margin: auto; text-align: center;" data-aos="fade-up">
@@ -1143,6 +1151,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
