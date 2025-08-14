@@ -1176,7 +1176,58 @@ body{
     margin-bottom: 0 !important;
     border-radius: 0 !important;        /* щоб не було «білого кута» */
   }
-}    
+}
+    .cta-mid{
+  background: linear-gradient(135deg, #fff3a6 0%, #ffd84d 60%, #ffc400 100%);
+  color:#0a2a6b;
+  border-radius: 16px;
+  padding: clamp(20px, 4vw, 36px);
+  text-align: center;
+  max-width: 1000px;
+  margin: 34px auto;
+  box-shadow: 0 10px 28px rgba(255, 196, 0, .35);
+  position: relative;
+  overflow: hidden;
+}
+.cta-mid::before{
+  content:"";
+  position:absolute; inset:-30%;
+  background: radial-gradient(circle at 20% -10%, rgba(255,255,255,.45), transparent 55%);
+  pointer-events:none;
+}
+.cta-mid__icon{
+  font-size: clamp(28px, 4.5vw, 40px);
+  line-height: 1; margin-bottom: 10px;
+}
+.cta-mid h3{
+  font-size: clamp(18px, 4.2vw, 28px);
+  font-weight: 900; margin: 0 0 10px;
+}
+.cta-mid p{
+  font-size: clamp(14px, 2.8vw, 17px);
+  margin: 0 0 16px; color:#1a1a1a;
+}
+.cta-mid__btn{
+  display:inline-block;
+  padding: 12px 22px;
+  border: none; border-radius: 999px;
+  font-weight: 800; font-size: clamp(14px, 3.8vw, 16px);
+  color:#fff; cursor:pointer;
+  background: linear-gradient(135deg, #007bff 0%, #0056d2 100%);
+  box-shadow: 0 8px 22px rgba(0, 91, 255, .35);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.cta-mid__btn:hover{ transform: translateY(-2px); box-shadow:0 12px 28px rgba(0,91,255,.45); }
+.cta-mid__btn:active{ transform: translateY(0); }
+.cta-mid__note{
+  margin-top: 10px; font-size: 13px; opacity:.85; font-weight:600;
+}
+
+/* Mobile tweaks */
+@media (max-width:600px){
+  .cta-mid{ margin: 22px 12px; padding: 22px 14px; border-radius: 12px; }
+  .cta-mid__note{ font-size: 12px; }
+}
 
   </style>
 </head>
@@ -1383,6 +1434,16 @@ body{
     </div>
   </div>
 </section>
+  <section class="cta-mid" data-aos="zoom-in">
+  <div class="cta-mid__icon">🎁</div>
+  <h3>Пробний урок безкоштовно — перевір, чи підходить наш формат</h3>
+  <p>Залиште контакти — підберемо зручний час і групу. Можна онлайн або у Вроцлаві.</p>
+  <button class="cta-mid__btn"
+          onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+    Записатися на пробний урок
+  </button>
+  <div class="cta-mid__note">⌛ Місць обмежено</div>
+</section>
 <section class="about-us" data-aos="fade-up">
   <h2 class="section-title">Про нас</h2>
   <div class="about-wrapper">
@@ -1578,6 +1639,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
