@@ -1016,6 +1016,148 @@ button:hover, .btn-send:hover{
   object-fit: cover;
   border-radius: 0; /* якщо хочеш без закруглень у intro */
 }
+:root{
+  --ui-blue-1:#007BFF;     /* насичений синій */
+  --ui-blue-2:#0056d2;     /* глибокий синій */
+  --ui-cyan:#00d4ff;       /* бірюзовий акцент */
+  --ui-yellow:#ffd600;     /* яскравий жовтий */
+  --ui-ink:#0a2a6b;
+}
+
+/* ---------- WHY US ---------- */
+.why-us{
+  padding: clamp(40px,6vw,70px) 20px;
+  background: linear-gradient(135deg, #eaf3ff 0%, #fff 60%);
+  border-radius: 16px;
+}
+.why-us h2{
+  color: var(--ui-ink);
+  font-weight: 900;
+  letter-spacing:.2px;
+}
+.why-card{
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px 18px;
+  box-shadow: 0 12px 30px rgba(0, 91, 255, 0.10);
+  border: 1px solid rgba(0,0,0,.05);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.why-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(0, 91, 255, 0.18);
+  border-color: rgba(0, 91, 255, 0.25);
+}
+.why-card > div:first-child{           /* емодзі-іконка */
+  width: 46px; height: 46px;
+  display: grid; place-items: center;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  background: radial-gradient(#fff, #e6f0ff);
+  box-shadow: inset 0 0 0 2px rgba(0,123,255,.15);
+  font-size: 22px;
+}
+.why-card h3{
+  color:#0a2a6b; font-weight:800; margin:8px 0 6px;
+}
+.why-card p{ color:#333; }
+
+/* ---------- ABOUT US ---------- */
+.about-us{
+  background: linear-gradient(135deg, #fff7c4 0%, #fff 55%);
+  border: 1px solid rgba(255,214,0,.35);
+  box-shadow: 0 12px 34px rgba(255,214,0,.18);
+}
+.about-points li{
+  border-left: 5px solid var(--ui-blue-1);
+  background: #ffffff;
+}
+.about-points li::marker{ color:transparent; }
+
+/* ---------- FAQ ---------- */
+.faq-section{
+  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 70%);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.05);
+}
+.faq-item{
+  background: #ffffff;
+  border-left: 5px solid var(--ui-blue-1);
+  border-radius: 12px;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.faq-item:hover{ transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,91,255,.10); }
+.faq-question{
+  font-weight: 800; color:#0a2a6b;
+}
+.faq-item.active{ border-color: var(--ui-cyan); }
+
+/* ---------- CONTACT ---------- */
+.contact-section{
+  background: linear-gradient(135deg, var(--ui-blue-1), var(--ui-blue-2));
+  color:#fff;
+  border-radius: 16px;
+  box-shadow: 0 18px 44px rgba(0,87,183,.35);
+}
+.contact-section .section-title{ color:#fff; }
+.contact-subtitle{ color: rgba(255,255,255,.9); }
+.contact-form{
+  background: rgba(255,255,255,.08);
+  padding: 18px; border-radius: 12px;
+  backdrop-filter: blur(6px);
+}
+.contact-form input,
+.contact-form textarea{
+  background:#fff; color:#111;
+  border:1px solid rgba(0,0,0,.12);
+}
+.contact-form input:focus,
+.contact-form textarea:focus{
+  outline:none;
+  border-color: #7ec3ff;
+  box-shadow: 0 0 0 4px rgba(0,162,255,.15);
+}
+.contact-form button,
+.btn-send{
+  background: linear-gradient(135deg, #ffd500, #ffb800);
+  color:#111;
+  font-weight:900;
+}
+.contact-form button:hover,
+.btn-send:hover{
+  box-shadow: 0 16px 36px rgba(255,200,0,.45);
+}
+
+/* Соцпосилання — світлі на темному */
+.social-links a{ color:#fff !important; opacity:.96; }
+.social-links a:hover{ opacity:1; text-decoration: underline; }
+
+/* ---------- TESTIMONIALS ---------- */
+.testimonials-section{
+  background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 70%);
+}
+.testimonial-card{
+  background:#ffffff;
+  border:1px solid rgba(0,0,0,.06);
+  box-shadow:0 12px 30px rgba(0,91,255,.10);
+  border-radius:16px;
+}
+.stars{ color:#ffc400; }
+
+/* Якщо у тебе автоскрол доріжка — легкий градієнт-«маска» по краях */
+.testimonials-viewport{
+  mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+}
+
+/* ---------- FOOTER ---------- */
+.site-footer{
+  background: linear-gradient(180deg, #0a2a6b, #071c46);
+  color:#eaf2ff;
+  border-top: 4px solid var(--ui-yellow);
+  box-shadow: 0 -8px 26px rgba(0,0,0,.18) inset;
+}
+.site-footer p{ opacity:.95; }
 
   </style>
 </head>
@@ -1415,6 +1557,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
