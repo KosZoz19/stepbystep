@@ -929,27 +929,45 @@ button:hover, .btn-send:hover{
   z-index: 1;
 }
 
-.intro-text{
-  flex: 1 1 55%;
+.intro-section{
+  background: linear-gradient(135deg, #f0f8ff, #e6f0ff);
+  border-radius: 18px;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.06);
+  max-width: 1000px;
+  margin: 40px auto;
+  overflow: hidden;
 }
 
-.intro-image{
-  flex: 1 1 40%;
+.intro-image-top img{
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.intro-text{
+  padding: clamp(20px, 4vw, 40px);
   text-align: center;
 }
 
-.intro-image img{
-  max-width: 100%;
-  height: auto;
-  border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+.intro-text h2{
+  font-size: clamp(24px, 4.5vw, 36px);
+  font-weight: 800;
+  margin-bottom: 18px;
+  color: #0a2a6b;
 }
 
-/* Mobile layout: image above text, hide 3rd paragraph */
+.intro-text p{
+  font-size: clamp(15px, 2.6vw, 18px);
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 14px;
+}
+
+/* Мобільна версія — ховаємо 3-й абзац */
 @media (max-width: 600px){
-  .intro-content{ flex-direction: column; text-align: left; }
-  .intro-image{ order: -1; } /* put image first */
   .intro-text p:nth-of-type(3){ display: none; }
+  .intro-text{ text-align: left; }
 }
   </style>
 </head>
@@ -980,6 +998,10 @@ button:hover, .btn-send:hover{
 <!-- Вступ -->
 <section id="intro-section" class="intro-section" data-aos="fade-up">
   <div class="intro-content">
+     <div class="intro-image-top">
+    <img src="students-high-fiving-in-classroom-WF2014064.png" 
+         alt="Учні Step by Step на уроці">
+  </div>
     <div class="intro-text">
       <h2>Ласкаво просимо до Step by Step!</h2>
       <p>
@@ -999,9 +1021,6 @@ button:hover, .btn-send:hover{
       </p>
     </div>
 
-    <div class="intro-image">
-      <img src="students-high-fiving-in-classroom-WF2014064.png" alt="Учні Step by Step на уроці">
-    </div>
   </div>
 </section>
 <section id="offers" data-aos="fade-up" style="background: #ffffff; padding: 60px 20px;">
@@ -1348,6 +1367,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
