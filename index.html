@@ -194,13 +194,24 @@ details[open] {
   padding: 50px 20px;
 }
 
-.testimonials-grid{
-  display:grid;                      /* головне */
-  grid-template-columns: repeat(3, minmax(280px,1fr));
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(280px, 1fr)); /* 4 відгуки в рядок */
   gap: 24px;
-  max-width: 1200px;                 /* не розтягуємося надто широко */
+  max-width: 1200px;
   margin: 0 auto;
   align-items: stretch;
+  overflow-x: auto; /* щоб можна було гортати на мобільному */
+  padding-bottom: 10px; /* трошки відступу під скролбар */
+}
+
+.testimonials-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.testimonials-grid::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
 }
 
 .testimonial-card{
@@ -1219,6 +1230,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
