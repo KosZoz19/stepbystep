@@ -497,9 +497,11 @@ img {
   padding:48px 20px 36px;
 }
 .hero-logo{
-  max-width:200px;
+  max-width:300px;
   display:block;
   margin:0 auto 18px;
+  margin-top:-70px;
+  margin-bottom:50px;
 }
 .hero-title{
   margin:0 0 18px;
@@ -969,26 +971,33 @@ button:hover, .btn-send:hover{
   </p>
 </section>
 <section id="values" data-aos="fade-up" 
-         style="background:#fff9d9; padding:60px 20px; text-align:center; color:#0a2a6b; margin-top:60px; border:2px solid #0a2a6b; border-radius:10px;">
-  <h2 style="font-size:2rem; font-weight:bold; margin-bottom:20px;">🌟 Наші цінності</h2>
-  <p style="max-width:800px; margin:0 auto 30px; font-size:1.1rem; line-height:1.6;">
-    Ми будуємо навчання на основі довіри, мотивації та постійного розвитку кожного учня.
-    Діти залишаються з нами роками, а наші викладачі супроводжують їх на кожному етапі.
-  </p>
-
-  <img src="kids.jpg" alt="Учні Step by Step на занятті"
-       style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08); margin: 20px 0;">
+         style="background:#fff9d9; padding:60px 20px; color:#0a2a6b; margin-top:60px; border:2px solid #0a2a6b; border-radius:10px;">
+  <h2 style="font-size:2rem; font-weight:bold; margin-bottom:20px; text-align:center;">🌟 Наші цінності</h2>
   
+  <div style="display:flex; flex-wrap:wrap; gap:30px; align-items:flex-start; max-width:900px; margin:0 auto;">
+    <!-- Ліва частина з текстом та списком -->
+    <div style="flex:1 1 350px;">
+      <p style="font-size:1.1rem; line-height:1.6; margin-bottom:20px;">
+        Ми будуємо навчання на основі довіри, мотивації та постійного розвитку кожного учня.
+        Діти залишаються з нами роками, а наші викладачі супроводжують їх на кожному етапі.
+      </p>
+      <ul style="font-size:1.1rem; line-height:1.6; list-style:none; padding-left:0; margin:0;">
+        <li>🤝 Тривалі стосунки між учнем і викладачем.</li>
+        <li>👥 Групові заняття, підібрані за віком і рівнем.</li>
+        <li>📝 Перевірка рівня знань перед стартом курсу.</li>
+        <li>📚 Амбітна програма та авторські матеріали.</li>
+        <li>💻 Додаткові ресурси онлайн.</li>
+        <li>📞 Постійна підтримка викладача.</li>
+        <li>📈 Щоденний моніторинг прогресу учнів.</li>
+      </ul>
+    </div>
 
-  <ul style="max-width:800px; margin:0 auto; text-align:left; font-size:1.1rem; line-height:1.6; list-style:none; padding-left:0;">
-    <li>🤝 Тривалі стосунки між учнем і викладачем.</li>
-    <li>👥 Групові заняття, підібрані за віком і рівнем.</li>
-    <li>📝 Перевірка рівня знань перед стартом курсу.</li>
-    <li>📚 Амбітна програма та авторські матеріали.</li>
-    <li>💻 Додаткові ресурси онлайн.</li>
-    <li>📞 Постійна підтримка викладача.</li>
-    <li>📈 Щоденний моніторинг прогресу учнів.</li>
-  </ul>
+    <!-- Права частина з фото -->
+    <div style="flex:0 0 250px; text-align:center;">
+      <img src="kids.jpg" alt="Учні Step by Step на занятті"
+           style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.08);">
+    </div>
+  </div>
 </section>
 
 <!-- Dlaczego Step by Step -->
@@ -1210,6 +1219,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
