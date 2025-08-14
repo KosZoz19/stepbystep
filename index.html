@@ -100,6 +100,38 @@ details[open] {
     opacity: 0.16;
   }
 }
+    .attendance-bright{
+  background: linear-gradient(135deg, #007BFF, #0056d2);
+  color: #fff;
+  border-radius: 14px;
+  padding: clamp(20px, 4vw, 40px);
+  text-align: center;
+  max-width: 1000px;
+  margin: 40px auto;
+  box-shadow: 0 8px 26px rgba(0, 87, 183, 0.4);
+}
+
+.attendance-icon{
+  font-size: 40px;
+  margin-bottom: 12px;
+}
+
+.attendance-bright h3{
+  font-size: clamp(20px, 4vw, 28px);
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.attendance-bright p{
+  font-size: clamp(15px, 2.5vw, 18px);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* На мобільних — трохи менший відступ зверху */
+@media (max-width: 600px){
+  .attendance-bright{ padding: 24px 16px; }
+}
 .contact-section {
   background: var(--color-light);
   padding: 60px 20px;
@@ -1109,13 +1141,13 @@ button:hover, .btn-send:hover{
   </div>
 </section>
   <!-- Чому дитина не пропустить урок -->
-<section id="attendance" style="background: #f5f9ff; padding: 40px 20px; border-radius: 12px; max-width: 1000px; margin: 40px auto;" data-aos="fade-up">
-  <h3 style="font-size: 1.6rem; font-weight: bold; margin-bottom: 15px; color:#0a2a6b;">
-    Чому ваша дитина ніколи не пропустить уроки англійської у Step by Step?
-  </h3>
-  <p style="font-size: 1.05rem; line-height: 1.6; color:#333;">
-    Ваша дитина завжди буде присутня на заняттях, навіть якщо вона захворіє або буде на відпочинку, адже завжди може приєднатися до уроків <strong>онлайн</strong> відповідно до розкладу за допомогою платформи <strong>Google Meet</strong>. 
-    Достатньо лише сповістити вчителя про своє бажання.
+section class="attendance-bright" data-aos="fade-up">
+  <div class="attendance-icon">📅</div>
+  <h3>Чому ваша дитина ніколи не пропустить уроки англійської у Step by Step?</h3>
+  <p>
+    Ваша дитина завжди буде присутня на заняттях, навіть якщо вона захворіє або буде на відпочинку, 
+    адже завжди може приєднатися до уроків <strong>онлайн</strong> відповідно до розкладу за допомогою 
+    платформи <strong>Google Meet</strong>. Достатньо лише сповістити вчителя про своє бажання.
   </p>
 </section>
 <section id="values" data-aos="fade-up" 
@@ -1368,6 +1400,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
