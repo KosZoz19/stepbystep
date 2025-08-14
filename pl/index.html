@@ -1235,11 +1235,11 @@ body{
   </style>
 </head>
 
-<body>
-<!-- Kids photo -->
 <header class="hero" data-aos="fade-up">
+  <div class="hero-bg"></div> <!-- опціонально: тьмяне лого ззаду -->
   <img class="hero-logo" src="logo.png" alt="Step by Step logo">
 
+  <!-- UA або PL заголовок -->
   <h1 class="hero-title">
     SKUTECZNA NAUKA JĘZYKA ANGIELSKIEGO WE
     <span class="hero-city">WROCŁAWIU</span>
@@ -1247,10 +1247,8 @@ body{
 
   <section class="cta-section">
     <p>Darmowa lekcja czeka na Ciebie! Zostaw zgłoszenie już teraz.</p>
-    <button class="cta-btn"
-      onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
-      Zapisz się na <span class="highlight-free">darmowe</span> zajęcie
-      <span class="shine"></span>
+    <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      Zapisz się na <span class="highlight-free">darmowe</span> zajęcia
     </button>
   </section>
 </header>
