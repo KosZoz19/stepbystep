@@ -2,44 +2,35 @@
 <html lang="uk">
 <head>
 <script>
-<script>
 (function () {
-  // repo base path on GitHub Pages
   var BASE = "/stepbystep";
 
-  // helper: strip extra trailing slashes
-  function trimSlash(p){ return (p || "").replace(/\/+$/, ""); }
+  function trim(p){ return (p||"").replace(/\/+$/,""); }
+  var path = trim(location.pathname);
+  var onPL = path.startsWith(trim(BASE + "/pl"));
+  var onUA = !onPL;
 
-  // where we are now
-  var path = trimSlash(location.pathname);
-  var onPL = path.startsWith(trimSlash(BASE + "/pl"));
-  var onUA = !onPL; // everything else under /stepbystep is UA
-
-  // languages in priority order as reported by browser
-  function normLangs(){
+  function getLangs(){
     var raw = (navigator.languages && navigator.languages.length)
       ? navigator.languages
       : [navigator.language || navigator.userLanguage || ""];
-    return raw.map(x => (x || "").toLowerCase().split("-")[0]);
+    return raw.map(x => (x || "").toLowerCase().split("-")[0]); // "en-US" -> "en"
   }
 
-  // allow test override via ?lang=xx or localStorage
+  // allow testing override
   var qs = new URLSearchParams(location.search);
   var forced = (qs.get("lang") || localStorage.getItem("sbs_lang") || "").toLowerCase();
-  var langs = forced ? [forced] : normLangs();
+  var langs = forced ? [forced] : getLangs();
 
-  // choose the FIRST supported lang from the list
-  // mapping: uk -> UA site, pl/en -> PL site
-  var first = langs.find(l => l === "uk" || l === "pl" || l === "en") || "uk";
+  // first supported lang; fallback = PL
+  var first = langs.find(l => l === "uk" || l === "pl" || l === "en") || "pl";
 
   var wantPL = (first === "pl" || first === "en");
   var wantUA = (first === "uk");
 
-  // redirect only if needed (avoid loops)
   if (wantPL && !onPL) location.replace(BASE + "/pl/");
   if (wantUA && !onUA) location.replace(BASE + "/");
 })();
-</script>
 </script>
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <meta charset="UTF-8">
@@ -1679,6 +1670,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
