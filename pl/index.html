@@ -2,7 +2,57 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
- 
+ <script>
+(function () {
+  // ---- CONFIG: your repo base path on GitHub Pages ----
+  var BASE = "/stepbystep";     // <- keep this exactly for koszoz19.github.io/stepbystep
+
+  // Small helpers
+  var path = location.pathname.replace(/\/+$/, ""); // trim trailing slash
+  var onPL  = path.startsWith(BASE + "/pl");
+  var onUA  = !onPL; // everything else under /stepbystep is UA version
+
+  function normLangs() {
+    var raw = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || navigator.userLanguage || ""]);
+    return raw.map(function (l) { return (l || "").toLowerCase().split("-")[0]; });
+  }
+
+  function buildTarget(toPL) {
+    // preserve query (except ?lang=...) and hash
+    var url = new URL(location.href);
+    url.searchParams.delete("lang");
+    var qs   = url.searchParams.toString();
+    var hash = url.hash || "";
+    var dest = toPL ? (BASE + "/pl/") : (BASE + "/");
+    return dest + (qs ? ("?" + qs) : "") + hash;
+  }
+
+  // 1) Manual override via ?lang=pl / ?lang=uk
+  (function handleManual()) {
+    var p = new URLSearchParams(location.search);
+    var lang = (p.get("lang") || "").toLowerCase();
+    if (lang === "pl" || lang === "uk") {
+      try { localStorage.setItem("sbs_lang", lang); } catch(e){}
+      location.replace(buildTarget(lang === "pl"));
+    }
+  })();
+
+  // 2) Respect saved override
+  var saved = null;
+  try { saved = localStorage.getItem("sbs_lang"); } catch(e){}
+  if (saved === "pl" && !onPL) { location.replace(buildTarget(true));  return; }
+  if (saved === "uk" && onPL)  { location.replace(buildTarget(false)); return; }
+
+  // 3) Auto-detect only when user hasn't overridden
+  var langs = normLangs();
+  var isUA  = langs.indexOf("uk") > -1 || langs.indexOf("ua") > -1; // handle uk-UA / (sometimes) ua
+  var isPL  = langs.indexOf("pl") > -1;
+  var isEN  = langs.indexOf("en") > -1;
+
+  // Rule: UA -> UA site; PL or EN -> PL site; others -> PL (default)
+  if (isUA && onPL)  { location.replace(buildTarget(false)); return; }
+  if ((isPL || isEN || !isUA) && !onPL) { location.replace(buildTarget(true)); return; }
+})();
 </script>
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <meta charset="UTF-8">
