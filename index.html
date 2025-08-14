@@ -220,13 +220,13 @@ details[open] {
   font-style: italic;
   margin-top: 0;
 }
-   @media (max-width: 600px){
-  /* робимо фото зверху «геройським» банером */
+ @media (max-width: 600px){
   .intro-image-top{
-    /* даємо фото вийти на всю ширину секції */
     margin: -4px -12px 12px -12px;
-    margin-left: -80px;/* піджимаємо боки, щоб виглядало full-bleed */
+    margin-left: -80px; /* за бажанням прибери цей рядок, він дає перекіс */
   }
+} /* ← ЗАКРИВАЄМО media, дуже важливо! */
+
 /* Секція з відгуками */
 .testimonials-section{
   background:#f8fbff;
@@ -1415,6 +1415,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
