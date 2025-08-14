@@ -1,6 +1,39 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
+  <script>
+(function () {
+  // Run only on the UA root of this repo (not on /pl, not on other pages)
+  var path = location.pathname.replace(/\/+$/,'');
+  if (!/^\/stepbystep(?:\/index\.html)?$/.test(path)) return;
+
+  // Manual overrides (?lang=pl or ?lang=uk) and remembered choice
+  var qs = new URLSearchParams(location.search);
+  var choice = (qs.get('lang') || localStorage.getItem('sbs_lang') || '').toLowerCase();
+
+  function toPL() {
+    localStorage.setItem('sbs_lang','pl');
+    location.replace(location.origin + '/stepbystep/pl/');
+  }
+  function toUA() {
+    localStorage.setItem('sbs_lang','uk'); // remember and stay
+  }
+
+  if (choice === 'pl')  return toPL();
+  if (choice === 'uk')  return toUA();
+
+  // Detect from browser language
+  var langs = (navigator.languages && navigator.languages.length
+               ? navigator.languages
+               : [navigator.language || navigator.userLanguage])
+               .map(function(l){ return (l||'').toLowerCase(); });
+
+  if (langs.some(function(l){ return l.startsWith('pl'); })) return toPL();
+  if (langs.some(function(l){ return l.startsWith('uk') || l === 'ua'; })) return toUA();
+
+  // Default fallback: stay on UA
+})();
+</script>
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -1639,6 +1672,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
