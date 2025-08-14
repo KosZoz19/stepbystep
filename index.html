@@ -162,43 +162,10 @@ details[open] {
   font-size: 14px;
   margin-top: 40px;
 }
-.testimonials-section {
-  padding: 60px 20px;
-  background: #f9fbff;
-  border-radius: 16px;
-  max-width: 1000px;
-  margin: auto;
-}
 .section-title {
   text-align: center;
   color: var(--color-blue);
   margin-bottom: 40px;
-}
-.testimonials-grid {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-.testimonial-card {
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  padding: 20px;
-  max-width: 280px;
-  flex: 1 1 260px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  transition: transform 0.3s ease;
-}
-.testimonial-card:hover {
-  transform: translateY(-5px);
-}
-.testimonial-header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
 }
 .avatar {
   width: 48px;
@@ -221,13 +188,56 @@ details[open] {
   font-style: italic;
   margin-top: 0;
 }
-@media (max-width: 600px) {
-  .testimonials-grid {
-    flex-direction: column;
-    gap: 15px;
+/* Секція з відгуками */
+.testimonials-section{
+  background:#f8fbff;
+  padding: 50px 20px;
+}
+
+.testimonials-grid{
+  display:grid;                      /* головне */
+  grid-template-columns: repeat(3, minmax(280px,1fr));
+  gap: 24px;
+  max-width: 1200px;                 /* не розтягуємося надто широко */
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+.testimonial-card{
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 8px 24px rgba(0,0,0,.06);
+  padding:22px;
+  height:100%;                       /* щоб картки вирівнювались по висоті */
+  display:flex;
+  flex-direction:column;
+}
+
+/* хедер картки */
+.testimonial-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+}
+
+.testimonial-card .avatar{
+  width:44px; height:44px; border-radius:50%;
+  object-fit:cover;
+}
+
+.stars{ margin:6px 0 10px; color:#ffb400; letter-spacing:2px; }
+.feedback{ color:#333; line-height:1.6; }
+
+/* Адаптив */
+@media (max-width: 1024px){
+  .testimonials-grid{
+    grid-template-columns: repeat(2, minmax(260px,1fr));
   }
-  .testimonial-card {
-    max-width: 100%;
+}
+@media (max-width: 640px){
+  .testimonials-grid{
+    grid-template-columns: 1fr;
   }
 }
 .faq-section {
@@ -1199,6 +1209,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
