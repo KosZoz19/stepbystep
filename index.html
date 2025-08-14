@@ -2,24 +2,30 @@
 <html lang="uk">
 <head>
 <script>
-(function () {
-  var BASE="/stepbystep";
-  var path = location.pathname.replace(/\/+$/, "");
-  var onPL = path.startsWith(BASE + "/pl");
-  var onUA = !onPL;
+  (function () {
+    var BASE = "/stepbystep";
 
-  function normLangs(){
-    var raw = (navigator.languages && navigator.languages.length) ?
-              navigator.languages : [navigator.language || navigator.userLanguage || ""];
-    return raw.map(x => (x || "").toLowerCase().split("-")[0]);
-  }
-  var langs = normLangs();
-  var prefersPL = langs.some(x => x === "pl" || x === "en");  // PL or EN → go to /pl
-  var prefersUA = langs.some(x => x === "uk" || x === "ua");  // UA → stay root
+    // --- test overrides ---
+    var qs = new URLSearchParams(location.search);
+    var forced = (qs.get("lang") || localStorage.getItem("sbs_lang") || "").toLowerCase();
 
-  if (prefersPL && !onPL) location.replace(BASE + "/pl/");
-  if (prefersUA && onPL)  location.replace(BASE + "/");
-})();
+    function normLangs(){
+      var raw = (navigator.languages && navigator.languages.length)
+        ? navigator.languages
+        : [navigator.language || navigator.userLanguage || ""];
+      return raw.map(x => (x || "").toLowerCase().split("-")[0]);
+    }
+
+    var langs = forced ? [forced] : normLangs();
+    var path  = location.pathname.replace(/\/+$/, "");
+    var onPL  = path.startsWith(BASE + "/pl");
+
+    var prefersPL = langs.some(x => x === "pl" || x === "en");
+    var prefersUA = langs.some(x => x === "uk" || x === "ua");
+
+    if (prefersPL && !onPL) location.replace(BASE + "/pl/");
+    if (prefersUA && onPL)  location.replace(BASE + "/");
+  })();
 </script>
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <meta charset="UTF-8">
@@ -1659,6 +1665,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
