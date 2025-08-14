@@ -920,6 +920,37 @@ button:hover, .btn-send:hover{
   .intro-section{ text-align: left; margin: 24px 12px; }
   .intro-section p{ margin-bottom: 12px; }
 }
+.intro-content{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.intro-text{
+  flex: 1 1 55%;
+}
+
+.intro-image{
+  flex: 1 1 40%;
+  text-align: center;
+}
+
+.intro-image img{
+  max-width: 100%;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* Mobile layout: image above text, hide 3rd paragraph */
+@media (max-width: 600px){
+  .intro-content{ flex-direction: column; text-align: left; }
+  .intro-image{ order: -1; } /* put image first */
+  .intro-text p:nth-of-type(3){ display: none; }
+}
   </style>
 </head>
 
@@ -948,23 +979,30 @@ button:hover, .btn-send:hover{
 </header>
 <!-- Вступ -->
 <section id="intro-section" class="intro-section" data-aos="fade-up">
-  <h2>Ласкаво просимо до Step by Step!</h2>
+  <div class="intro-content">
+    <div class="intro-text">
+      <h2>Ласкаво просимо до Step by Step!</h2>
+      <p>
+        Мовна школа <strong>Step by Step</strong> – це провідний навчальний заклад, який вже понад
+        <strong>21 рік</strong> успішно навчає дітей та дорослих різних рівнів володіння англійською мовою
+        в Україні та Польщі.
+      </p>
+      <p>
+        Наша школа пропонує гнучкі формати навчання: <strong>онлайн</strong> та <strong>в класі</strong>,
+        що дозволяє кожному знайти зручний спосіб навчання. Ми пишаємося досягненнями наших учнів,
+        які завдяки досвідченим викладачам досягають високих результатів.
+      </p>
+      <p>
+        Ми створюємо підтримуюче та інклюзивне середовище, де кожен може
+        вдосконалити свої мовні навички та впевнено спілкуватися англійською.
+        Приєднуйтесь і відкрийте нові можливості зі <strong>Step by Step</strong>!
+      </p>
+    </div>
 
-  <p>
-    Мовна школа <strong>Step by Step</strong> – це провідний навчальний заклад, який вже понад
-    <strong>21 рік</strong> успішно навчає дітей та дорослих різних рівнів володіння англійською мовою
-    в Україні та Польщі.
-  </p>
-  <p>
-    Наша школа пропонує гнучкі формати навчання: <strong>онлайн</strong> та <strong>в класі</strong>,
-    що дозволяє кожному знайти зручний спосіб навчання. Ми пишаємося досягненнями наших учнів,
-    які завдяки досвідченим викладачам досягають високих результатів.
-  </p>
-  <p>
-    У Step by Step ми створюємо підтримуюче та інклюзивне середовище, де кожен може
-    вдосконалити свої мовні навички та впевнено спілкуватися англійською.
-    Приєднуйтесь і відкрийте нові можливості зі <strong>Step by Step</strong>!
-  </p>
+    <div class="intro-image">
+      <img src="students-high-fiving-in-classroom-WF2014064.png" alt="Учні Step by Step на уроці">
+    </div>
+  </div>
 </section>
 <section id="offers" data-aos="fade-up" style="background: #ffffff; padding: 60px 20px;">
   <h2 style="text-align: center; font-size: 2rem; font-weight: bold; margin-bottom: 40px;">Наші курси</h2>
@@ -1309,6 +1347,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
