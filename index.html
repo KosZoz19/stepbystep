@@ -599,29 +599,74 @@ img {
   0% { left: -75%; }
   100% { left: 125%; }
 }
-    .intro-section {
-  background: linear-gradient(135deg, #f0f8ff, #e6f0ff);
-  padding: 50px 20px;
-  border-radius: 12px;
+.intro-section{
+  background: linear-gradient(135deg, #f0f8ff 0%, #e6f0ff 50%, #f9faff 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.06);
+  padding: clamp(28px, 4.5vw, 50px) clamp(18px, 5vw, 40px);
+  max-width: 1000px;
+  margin: 40px auto;
   text-align: center;
-  margin-bottom: 40px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  position: relative;
+  overflow: hidden;
 }
-.intro-section h2 {
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
+
+/* Легкий «світловий» ефект */
+.intro-section::before{
+  content:"";
+  position:absolute;
+  top:-50%;
+  left:-50%;
+  width:200%;
+  height:200%;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, transparent 60%);
+  animation: rotateLight 18s linear infinite;
+  z-index:0;
+}
+@keyframes rotateLight{
+  0%{ transform:rotate(0deg); }
+  100%{ transform:rotate(360deg); }
+}
+
+.intro-section h2{
+  font-size: clamp(24px, 4.5vw, 36px);
   font-weight: 800;
-  margin-bottom: 20px;
-  color: #0044aa;
+  margin: 0 0 18px;
+  color:#0a2a6b;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
 }
-.intro-section h2 span {
-  color: #ffd600;
+
+.intro-section p{
+  font-size: clamp(15px, 2.6vw, 18px);
+  line-height: 1.7;
+  color:#333;
+  margin: 0 0 16px;
+  position: relative;
+  z-index: 1;
 }
-.intro-section p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  max-width: 900px;
-  margin: 0 auto;
-  color: #333;
+
+/* Анімація появи */
+.intro-section h2,
+.intro-section p{
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fadeUp 0.6s ease forwards;
+}
+.intro-section h2{ animation-delay: 0.1s; }
+.intro-section p:nth-of-type(1){ animation-delay: 0.25s; }
+.intro-section p:nth-of-type(2){ animation-delay: 0.4s; }
+.intro-section p:nth-of-type(3){ animation-delay: 0.55s; }
+
+@keyframes fadeUp{
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+/* На мобільних — тільки 2 абзаци, текст вирівнюємо ліворуч */
+@media (max-width: 600px){
+  .intro-section{ text-align: left; margin: 24px 12px; }
+  .intro-section p:nth-of-type(3){ display: none; }
 }
 
 .attendance {
@@ -1264,6 +1309,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
