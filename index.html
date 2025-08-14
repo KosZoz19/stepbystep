@@ -841,7 +841,38 @@ button:hover, .btn-send:hover{
         width:150px
       }
     }
-  
+  .intro-section{
+  background: linear-gradient(135deg, #f0f8ff, #e6f0ff);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  padding: clamp(28px, 4.5vw, 48px) clamp(16px, 4vw, 28px);
+  max-width: 1000px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+.intro-section h2{
+  /* 22–34px залежно від ширини екрана */
+  font-size: clamp(22px, 4.5vw, 34px);
+  font-weight: 800;
+  margin: 0 0 14px;
+  color:#0a2a6b;
+  line-height: 1.2;
+}
+
+.intro-section p{
+  /* 14–17px залежно від ширини екрана */
+  font-size: clamp(14px, 2.6vw, 17px);
+  line-height: 1.65;
+  color:#333;
+  margin: 0 0 14px;
+}
+
+/* На мобільних — ліве вирівнювання та щільніші відступи */
+@media (max-width:600px){
+  .intro-section{ text-align: left; margin: 24px 12px; }
+  .intro-section p{ margin-bottom: 12px; }
+}
   </style>
 </head>
 
@@ -1230,6 +1261,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
