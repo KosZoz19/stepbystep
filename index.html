@@ -2,30 +2,44 @@
 <html lang="uk">
 <head>
 <script>
-  (function () {
-    var BASE = "/stepbystep";
+<script>
+(function () {
+  // repo base path on GitHub Pages
+  var BASE = "/stepbystep";
 
-    // --- test overrides ---
-    var qs = new URLSearchParams(location.search);
-    var forced = (qs.get("lang") || localStorage.getItem("sbs_lang") || "").toLowerCase();
+  // helper: strip extra trailing slashes
+  function trimSlash(p){ return (p || "").replace(/\/+$/, ""); }
 
-    function normLangs(){
-      var raw = (navigator.languages && navigator.languages.length)
-        ? navigator.languages
-        : [navigator.language || navigator.userLanguage || ""];
-      return raw.map(x => (x || "").toLowerCase().split("-")[0]);
-    }
+  // where we are now
+  var path = trimSlash(location.pathname);
+  var onPL = path.startsWith(trimSlash(BASE + "/pl"));
+  var onUA = !onPL; // everything else under /stepbystep is UA
 
-    var langs = forced ? [forced] : normLangs();
-    var path  = location.pathname.replace(/\/+$/, "");
-    var onPL  = path.startsWith(BASE + "/pl");
+  // languages in priority order as reported by browser
+  function normLangs(){
+    var raw = (navigator.languages && navigator.languages.length)
+      ? navigator.languages
+      : [navigator.language || navigator.userLanguage || ""];
+    return raw.map(x => (x || "").toLowerCase().split("-")[0]);
+  }
 
-    var prefersPL = langs.some(x => x === "pl" || x === "en");
-    var prefersUA = langs.some(x => x === "uk" || x === "ua");
+  // allow test override via ?lang=xx or localStorage
+  var qs = new URLSearchParams(location.search);
+  var forced = (qs.get("lang") || localStorage.getItem("sbs_lang") || "").toLowerCase();
+  var langs = forced ? [forced] : normLangs();
 
-    if (prefersPL && !onPL) location.replace(BASE + "/pl/");
-    if (prefersUA && onPL)  location.replace(BASE + "/");
-  })();
+  // choose the FIRST supported lang from the list
+  // mapping: uk -> UA site, pl/en -> PL site
+  var first = langs.find(l => l === "uk" || l === "pl" || l === "en") || "uk";
+
+  var wantPL = (first === "pl" || first === "en");
+  var wantUA = (first === "uk");
+
+  // redirect only if needed (avoid loops)
+  if (wantPL && !onPL) location.replace(BASE + "/pl/");
+  if (wantUA && !onUA) location.replace(BASE + "/");
+})();
+</script>
 </script>
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
   <meta charset="UTF-8">
