@@ -1295,7 +1295,7 @@ body{
 
   <section class="cta-section">
     <p>Безкоштовний урок чекає на вас! Залишіть заявку прямо зараз.</p>
-   <button class="cta-btn" onclick="fbq('track','Contact'); document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+ <button class="cta-btn" onclick="fbq('track','Contact'); document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
       Записатись на <span class="highlight-free">безкоштовне</span> заняття
       <span class="shine"></span>
     </button>
@@ -1629,7 +1629,6 @@ body{
   });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script defer>
 window.addEventListener('DOMContentLoaded', () => {
   // ---- helpers ----
@@ -1697,17 +1696,16 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   // 5) Трекінг кнопки в секції "Пробний урок"
-  const trialBtn = document.querySelector('.cta-mid__btn');
-  if (trialBtn) {
-    trialBtn.addEventListener('click', () => {
-      console.log("Pixel event sent:", event, params);
-      track('Contact', { content_name: 'Trial lesson CTA' });
-    });
-  }
-});
+const trialBtn = document.querySelector('.cta-mid__btn');
+if (trialBtn) {
+  trialBtn.addEventListener('click', () => {
+    track('Contact', { content_name: 'Trial lesson CTA' });
+  });
+}
 </script>
 </body>
 </html>
+
 
 
 
