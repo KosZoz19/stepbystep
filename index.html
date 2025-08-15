@@ -1621,15 +1621,7 @@ body{
   AOS.init();
 </script>
 <script>
-  document.querySelectorAll('.faq-question').forEach(button => {
-    button.addEventListener('click', () => {
-      const faqItem = button.parentElement;
-      faqItem.classList.toggle('active');
-    });
-  });
-</script>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script defer>
+
 window.addEventListener('DOMContentLoaded', () => {
   // ---- helpers ----
   const track = (event, params={}) => {
@@ -1701,10 +1693,12 @@ if (trialBtn) {
   trialBtn.addEventListener('click', () => {
     track('Contact', { content_name: 'Trial lesson CTA' });
   });
-}
+  }
+});
 </script>
 </body>
 </html>
+
 
 
 
