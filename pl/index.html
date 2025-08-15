@@ -1594,61 +1594,6 @@ body{
     });
   });
 </script>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js" defer></script>
-<script defer>
-window.addEventListener('DOMContentLoaded', () => {
-  // 1) EmailJS init
-  emailjs.init("TzVjmgBT4lCRkRnVt"); // public key
-
-  // 2) Знайти форму на сторінці
-  const form = document.getElementById('contact-form') 
-            || document.querySelector('form#contact-form') 
-            || document.forms[0];
-
-  if (!form) {
-    console.error('contact-form not found');
-    return;
-  }
-
-  // 3) Підставити дані з URL (stepbystep.html?name=...&email=...&phone=...)
-  const params = new URLSearchParams(location.search);
-  if (params.get('name'))  form.name.value  = params.get('name');
-  if (params.get('email')) form.email.value = params.get('email');
-  if (params.get('phone')) form.phone.value = params.get('phone');
-   if (params.get('message')) form.message.value = params.get('message');
-
-  // 4) Відправка
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const btn = form.querySelector('.btn-send');
-    const original = btn.textContent;
-    btn.disabled = true; btn.textContent = 'Wysyłam…';
-
-    const data = {
-      name:    form.name.value,
-      email:   form.email.value,
-      phone:   form.phone.value,
-      message: form.message.value || ''
-    };
-
-    try {
-      await emailjs.send("service_bnb08ij", "template_14fxmya", data);
-      btn.textContent = "Wysłano ✅";
-      form.reset();
-    } catch (err) {
-      console.error(err);
-      btn.textContent = "Błąd, spróbuj ponownie!";
-    } finally {
-      setTimeout(() => {
-        btn.disabled = false;
-        btn.textContent = original;
-      }, 2000);
-    }
-  });
-});
-</script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script> 
 <script defer>
 window.addEventListener('DOMContentLoaded', () => {
@@ -1728,6 +1673,7 @@ if (trialBtn) {
 </script>
 </body>
 </html>
+
 
 
 
