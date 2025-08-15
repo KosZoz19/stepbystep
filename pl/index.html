@@ -1649,6 +1649,82 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script> 
+<script defer>
+window.addEventListener('DOMContentLoaded', () => {
+  // ---- helpers ----
+  const track = (event, params={}) => {
+    if (typeof fbq === 'function') {
+      console.log("Pixel event sent:", event, params);
+      try { fbq('track', event, params); } catch(e) { /* noop */ }
+    }
+  };
+
+  // 1) EmailJS init
+  emailjs.init("TzVjmgBT4lCRkRnVt"); // public key
+
+  // 2) Знайти форму
+  const form = document.getElementById('contact-form') 
+            || document.querySelector('form#contact-form') 
+            || document.forms[0];
+
+  if (!form) {
+    console.error('contact-form not found');
+    return;
+  }
+
+  // 3) Підставити дані з URL
+  const params = new URLSearchParams(location.search);
+  if (params.get('name'))    form.name.value    = params.get('name');
+  if (params.get('email'))   form.email.value   = params.get('email');
+  if (params.get('phone'))   form.phone.value   = params.get('phone');
+  if (params.get('message')) form.message.value = params.get('message');
+
+  // 4) Відправка форми
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const btn = form.querySelector('.btn-send') || form.querySelector('button[type="submit"]');
+    const original = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Wysyłam…'; }
+
+    const data = {
+      name:    form.name?.value || '',
+      email:   form.email?.value || '',
+      phone:   form.phone?.value || '',
+      message: form.message?.value || ''
+    };
+
+    try {
+      await emailjs.send("service_bnb08ij", "template_14fxmya", data);
+
+      // Meta Pixel: успішна заявка
+      track('Lead', { content_name: 'Contact form PL' });
+
+      if (btn) btn.textContent = "Wysłano ✅";
+      form.reset();
+    } catch (err) {
+      console.error(err);
+      if (btn) btn.textContent = "Błąd, spróbuj ponownie!!";
+    } finally {
+      if (btn) {
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.textContent = original;
+        }, 2000);
+      }
+    }
+  });
+
+  // 5) Трекінг кнопки в секції "Пробний урок"
+const trialBtn = document.querySelector('.cta-mid__btn');
+if (trialBtn) {
+  trialBtn.addEventListener('click', () => {
+    track('Contact', { content_name: 'Trial lesson CTA' });
+  });
+  }
+});
+</script>
 </body>
 </html>
 
