@@ -1635,6 +1635,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // ---- helpers ----
   const track = (event, params={}) => {
     if (typeof fbq === 'function') {
+      console.log("Pixel event sent:", event, params);
       try { fbq('track', event, params); } catch(e) { /* noop */ }
     }
   };
@@ -1699,6 +1700,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const trialBtn = document.querySelector('.cta-mid__btn');
   if (trialBtn) {
     trialBtn.addEventListener('click', () => {
+      console.log("Pixel event sent:", event, params);
       track('Contact', { content_name: 'Trial lesson CTA' });
     });
   }
@@ -1706,6 +1708,7 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+
 
 
 
