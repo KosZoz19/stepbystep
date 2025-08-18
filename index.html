@@ -10,7 +10,7 @@
 
   // Визначити, де ми зараз
   var here = location.pathname.replace(/\/+$/, "") || "/"; // без кінцевих слешів
-  var onUA = (here === "/" || here === ""); // корінь
+  var onUA = (here === "/ua"); // корінь
   var onPL = here.startsWith("/pl");
 
   // Допомога: безпечний редірект без миготіння
@@ -49,5 +49,6 @@
 </head>
 <body></body>
 </html>
+
 
 
