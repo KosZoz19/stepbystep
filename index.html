@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Redirecting...</title>
+  <meta charset="UTF-8" />
+  <title>Redirecting…</title>
   <script>
   (function () {
     var ROOT_UA = "/ua/"; // українська
     var ROOT_PL = "/pl/"; // польська
 
+    // Прибрати миготіння до редіректу на мобільних
+    try { document.documentElement.style.opacity = "0"; } catch (e) {}
+
     function go(url) {
       if (location.pathname !== url) {
-        window.stop(); // зупиняє рендеринг білої сторінки
-        location.replace(url);
+        location.replace(url); // mobile-safe
       }
     }
 
-    // 1) Query string (?lang=pl або ?lang=uk)
+    // 1) Пріоритет: ?lang=pl або ?lang=uk
     var qs = new URLSearchParams(location.search);
     var force = (qs.get("lang") || "").toLowerCase();
     if (force === "uk" || force === "pl") {
-      localStorage.setItem("sbs_lang", force);
-      if (force === "uk") go(ROOT_UA);
-      if (force === "pl") go(ROOT_PL);
+      try { localStorage.setItem("sbs_lang", force); } catch (e) {}
+      if (force === "uk") go(ROOT_UA); else go(ROOT_PL);
       return;
     }
 
-    // 2) LocalStorage
-    var saved = (localStorage.getItem("sbs_lang") || "").toLowerCase();
+    // 2) Якщо в локальному сховищі вже є вибір
+    var saved = "";
+    try { saved = (localStorage.getItem("sbs_lang") || "").toLowerCase(); } catch (e) {}
     if (saved === "uk") { go(ROOT_UA); return; }
     if (saved === "pl") { go(ROOT_PL); return; }
 
-    // 3) Авто: якщо є 'uk' у мовах браузера → UA, інакше PL
-    var langs = (navigator.languages && navigator.languages.length
-                ? navigator.languages
-                : [navigator.language || navigator.userLanguage || ""])
-                .map(x => (x || "").toLowerCase().split("-")[0]);
+    // 3) Автовизначення мови — шукаємо 'pl' у всіх доступних властивостях
+    function norm(x){ return (x||"").toLowerCase().split("-")[0]; }
 
-    var isPL = langs.includes("pl");
-    if (isPL) go(ROOT_PL); else go(ROOT_UA);
+    var list = [];
+    try {
+      if (Array.isArray(navigator.languages) && navigator.languages.length) {
+        list = list.concat(navigator.languages);
+      }
+      list.push(navigator.language, navigator.userLanguage, navigator.browserLanguage);
+    } catch (e) {}
+    list = list.filter(Boolean).map(norm);
+
+    var wantPL = list.indexOf("pl") !== -1; // якщо є польська — ідемо на PL, інакше на UA
+    if (wantPL) go(ROOT_PL); else go(ROOT_UA);
   })();
   </script>
-  <noscript>
-    <meta http-equiv="refresh" content="0; url=/pl/">
-  </noscript>
+  <noscript><meta http-equiv="refresh" content="0; url=/pl/"></noscript>
+  <style>html{background:#fff}</style>
 </head>
 <body></body>
 </html>
-
 
 
