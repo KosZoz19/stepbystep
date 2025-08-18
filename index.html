@@ -2,41 +2,21 @@
 <html lang="uk">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Step by Step — redirect</title>
-
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <script>
-  (function () {
-    // якщо відкрито на *.github.io — потрібен префікс репозиторію, на кастомному домені — ні
-    var REPO_BASE = "/stepbystep"; 
+  (function(){
+    var REPO_BASE = "/stepbystep";                       // для github.io
     var BASE = /\.github\.io$/i.test(location.hostname) ? REPO_BASE : "";
-
-    function langs(){
-      var a = (navigator.languages && navigator.languages.length)
-        ? navigator.languages
-        : [navigator.language || navigator.userLanguage || ""];
-      return a.map(x => String(x).toLowerCase().split("-")[0]); // "en-US" -> "en"
-    }
-
+    function getLangs(){ var raw = navigator.languages || [navigator.language || ""]; return raw.map(l=>l.toLowerCase().split("-")[0]); }
     var qs = new URLSearchParams(location.search);
     var forced = (qs.get("lang") || localStorage.getItem("sbs_lang") || "").toLowerCase();
-    var first = (forced || langs().find(x => x==="uk" || x==="pl" || x==="en") || "pl");
-
-    // uk -> "/", pl/en -> "/pl/"
-    var target = (first === "uk") ? "/" : "/pl/";
+    var first = forced || getLangs().find(l=>l==="uk"||l==="pl"||l==="en") || "pl";
     try { localStorage.setItem("sbs_lang", first); } catch(e){}
-
-    // join BASE + target, прибираємо дубль‑слеші
-    var url = (BASE + target).replace(/\/{2,}/g,"/");
-    if (qs.has("lang")) { qs.delete("lang"); if (qs.toString()) url += "?"+qs.toString(); }
-
-    // моментальний редирект БЕЗ відмальовування сторінки
+    var target = (first==="uk") ? "/ua/" : "/pl/";
+    var url = (BASE+target).replace(/\/{2,}/g,"/");
+    if(qs.has("lang")){ qs.delete("lang"); if(qs.toString()) url += "?"+qs.toString(); }
     location.replace(url);
   })();
   </script>
-
-  <!-- Fallback, якщо JS вимкнено: дефолтом віддамо польську -->
-  <noscript><meta http-equiv="refresh" content="0;url=/pl/"></noscript>
-</head>
-<body></body>
+</head><body></body>
 </html>
