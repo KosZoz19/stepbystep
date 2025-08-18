@@ -3,13 +3,22 @@
 <head>
 <script>
 (function () {
-  var BASE = "/stepbystep";
+  // 1) Визначаємо базу: на github.io потрібен префікс репозиторію, на власному домені — ні
+  var REPO_BASE = "/stepbystep"; // назва репозиторію
+  var BASE = /\.github\.io$/i.test(location.hostname) ? REPO_BASE : "";
 
-  function trim(p){ return (p||"").replace(/\/+$/,""); }
-  var path = trim(location.pathname);
-  var onPL = path.startsWith(trim(BASE + "/pl"));
-  var onUA = !onPL;
+  function norm(p){ p = (p || ""); if (!p.startsWith("/")) p = "/"+p; return p.replace(/\/+$/,""); }
+  function join(a,b){ return (norm(a)+"/"+(b||"")).replace(/\/{2,}/g,"/"); }
 
+  // 2) Поточний шлях відносно бази
+  var baseNorm = norm(BASE);
+  var path = norm(location.pathname);
+  if (baseNorm && path.startsWith(baseNorm)) path = path.slice(baseNorm.length) || "/";
+
+  // true якщо вже на польській секції
+  var onPL = /^\/pl(\/|$)/.test(path);
+
+  // 3) Отримуємо мови
   function getLangs(){
     var raw = (navigator.languages && navigator.languages.length)
       ? navigator.languages
@@ -17,19 +26,37 @@
     return raw.map(x => (x || "").toLowerCase().split("-")[0]); // "en-US" -> "en"
   }
 
-  // allow testing override
+  // 4) allow override: ?lang=uk|pl|en або localStorage
   var qs = new URLSearchParams(location.search);
   var forced = (qs.get("lang") || localStorage.getItem("sbs_lang") || "").toLowerCase();
   var langs = forced ? [forced] : getLangs();
 
-  // first supported lang; fallback = PL
+  // Перший підтримуваний (pl/en -> PL, uk -> UA; дефолт = PL)
   var first = langs.find(l => l === "uk" || l === "pl" || l === "en") || "pl";
-
   var wantPL = (first === "pl" || first === "en");
   var wantUA = (first === "uk");
 
-  if (wantPL && !onPL) location.replace(BASE + "/pl/");
-  if (wantUA && !onUA) location.replace(BASE + "/");
+  // 5) Зберігаємо вибір користувача (щоб не стрибало між перезавантаженнями)
+  try { localStorage.setItem("sbs_lang", first); } catch(e){}
+
+  // 6) Редіректи
+  function go(to){
+    var url = join(BASE, to);
+    // Якщо є параметр lang, видалимо його щоб не зациклити
+    if (qs.has("lang")) {
+      qs.delete("lang");
+      var clean = location.origin + url + (qs.toString() ? ("?"+qs.toString()) : "");
+      location.replace(clean);
+    } else {
+      location.replace(url);
+    }
+  }
+
+  if (wantPL && !onPL) {                 // хочемо PL, а знаходимось не в /pl/
+    go("/pl/");
+  } else if (wantUA && onPL) {           // хочемо UA, а знаходимось у /pl/
+    go("/");
+  }
 })();
 </script>
   <script>
@@ -1703,6 +1730,7 @@ if (trialBtn) {
 </script>
 </body>
 </html>
+
 
 
 
