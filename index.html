@@ -36,8 +36,8 @@
                 : [navigator.language || navigator.userLanguage || ""])
                 .map(x => (x || "").toLowerCase().split("-")[0]);
 
-    var isUK = langs.includes("uk");
-    if (isUK) go(ROOT_UA); else go(ROOT_PL);
+    var isPL = langs.includes("pl");
+    if (isPL) go(ROOT_PL); else go(ROOT_UA);
   })();
   </script>
   <noscript>
@@ -46,5 +46,6 @@
 </head>
 <body></body>
 </html>
+
 
 
