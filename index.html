@@ -1,22 +1,20 @@
-<!doctype html>
-<html lang="uk">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
   <script>
-  (function(){
-    var REPO_BASE = "/stepbystep";                       // для github.io
-    var BASE = /\.github\.io$/i.test(location.hostname) ? REPO_BASE : "";
-    function getLangs(){ var raw = navigator.languages || [navigator.language || ""]; return raw.map(l=>l.toLowerCase().split("-")[0]); }
-    var qs = new URLSearchParams(location.search);
-    var forced = (qs.get("lang") || localStorage.getItem("sbs_lang") || "").toLowerCase();
-    var first = forced || getLangs().find(l=>l==="uk"||l==="pl"||l==="en") || "pl";
-    try { localStorage.setItem("sbs_lang", first); } catch(e){}
-    var target = (first==="uk") ? "/ua/" : "/pl/";
-    var url = (BASE+target).replace(/\/{2,}/g,"/");
-    if(qs.has("lang")){ qs.delete("lang"); if(qs.toString()) url += "?"+qs.toString(); }
-    location.replace(url);
-  })();
+    (function () {
+      var langs = navigator.languages ? navigator.languages : [navigator.language || navigator.userLanguage];
+      langs = langs.map(x => (x || "").toLowerCase().split("-")[0]);
+
+      var first = langs.find(l => l === "uk" || l === "pl" || l === "en") || "pl";
+      if (first === "uk") {
+        window.location.replace("/"); // укр
+      } else {
+        window.location.replace("/pl/"); // польська + англійська
+      }
+    })();
   </script>
-</head><body></body>
+</head>
+<body></body>
 </html>
