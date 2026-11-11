@@ -184,17 +184,21 @@ a{color:var(--blue)}
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-  transition: transform .15s ease, opacity .15s ease;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.14);
 }
-.cookie-btn:hover {
+.cookie-btn:hover,
+.cookie-btn:focus-visible {
   transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.2);
+  outline: none;
 }
 .cookie-btn--primary {
-  background: #f4c95d;
+  background: linear-gradient(135deg, #f4c95d 0%, #f0bf3c 100%);
   color: #121f2d;
 }
 .cookie-btn--ghost {
-  background: transparent;
+  background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.25);
   color: #fff;
 }
@@ -217,12 +221,20 @@ a{color:var(--blue)}
   <div class="cookie-consent__inner">
     <div class="cookie-consent__text">
       <strong>Ця сторінка використовує файли cookie.</strong>
-      <p>Ми використовуємо cookie для роботи сайту та аналітики. Виберіть, чи хочете ви прийняти всі cookie чи відхилити додаткові.</p>
+      <p>Ми використовуємо файли cookie, необхідні для роботи сайту, а також, за Вашої згоди, аналітичні та рекламні. Обробка даних здійснюється відповідно до GDPR/RODO. Докладніше у <a href="polityka-prywatnosci.html">Політиці приватності</a>.</p>
     </div>
     <div class="cookie-consent__actions">
       <button type="button" class="cookie-btn cookie-btn--ghost" data-consent="denied">Відхилити</button>
+      <button type="button" class="cookie-btn cookie-btn--ghost" data-consent="settings">Налаштування cookies</button>
       <button type="button" class="cookie-btn cookie-btn--primary" data-consent="granted">Прийняти</button>
     </div>
+  </div>
+  <div class="cookie-consent__settings" hidden>
+    <div class="cookie-consent__settings-row">
+      <label><input type="checkbox" checked disabled> Необхідні</label>
+      <label><input type="checkbox" disabled> Аналітичні та рекламні</label>
+    </div>
+    <p>Вибравши „Прийняти”, ви даєте згоду на аналітичні та рекламні cookie. Ви можете змінити цей вибір у будь-який момент у налаштуваннях браузера або повторно відкривши банер cookies.</p>
   </div>
 </div>
 <nav class="site-nav">

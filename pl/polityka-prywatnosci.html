@@ -216,17 +216,21 @@ a{color:var(--blue)}
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-  transition: transform .15s ease, opacity .15s ease;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.14);
 }
-.cookie-btn:hover {
+.cookie-btn:hover,
+.cookie-btn:focus-visible {
   transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.2);
+  outline: none;
 }
 .cookie-btn--primary {
-  background: #f4c95d;
+  background: linear-gradient(135deg, #f4c95d 0%, #f0bf3c 100%);
   color: #121f2d;
 }
 .cookie-btn--ghost {
-  background: transparent;
+  background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.25);
   color: #fff;
 }
@@ -253,11 +257,11 @@ a{color:var(--blue)}
   <div class="cookie-consent__inner">
     <div class="cookie-consent__text">
       <strong>Ta strona używa plików cookie.</strong>
-      <p>Używamy cookie niezbędnych do działania strony oraz, za Twoją zgodą, cookie analityczne i reklamowe. Przetwarzanie danych odbywa się zgodnie z RODO. Więcej informacji znajdziesz w <a href="polityka-prywatnosci.html">Polityce prywatności</a>.</p>
+      <p>Używamy plików cookie niezbędnych do działania witryny oraz, za Twoją zgodą, plików analitycznych i reklamowych. Przetwarzanie danych odbywa się zgodnie z RODO. Więcej informacji znajdziesz w <a href="polityka-prywatnosci.html">Polityce prywatności</a>.</p>
     </div>
     <div class="cookie-consent__actions">
       <button type="button" class="cookie-btn cookie-btn--ghost" data-consent="denied">Odrzuć</button>
-      <button type="button" class="cookie-btn cookie-btn--ghost" data-consent="settings">Ustawienia</button>
+      <button type="button" class="cookie-btn cookie-btn--ghost" data-consent="settings">Ustawienia cookies</button>
       <button type="button" class="cookie-btn cookie-btn--primary" data-consent="granted">Akceptuję</button>
     </div>
   </div>
@@ -266,7 +270,7 @@ a{color:var(--blue)}
       <label><input type="checkbox" checked disabled> Niezbędne</label>
       <label><input type="checkbox" disabled> Analityczne i reklamowe</label>
     </div>
-    <p>Wybierając „Akceptuję”, wyrażasz zgodę na cookies analityczne i reklamowe. Możesz zmienić tę decyzję w każdej chwili w ustawieniach przeglądarki lub przez ponowne wywołanie banera cookies.</p>
+    <p>Wybierając „Akceptuję”, wyrażasz zgodę na cookies analityczne i reklamowe. Możesz zmienić tę decyzję w każdej chwili w ustawieniach przeglądarki lub ponownie otwierając baner cookies.</p>
   </div>
 </div>
 <nav class="site-nav">
