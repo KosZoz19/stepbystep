@@ -25,18 +25,45 @@
           return 'unset';
         }
       }
-      function applyConsent() {
-        var value = readConsent();
+      function writeConsent(value) {
+        try {
+          localStorage.setItem(STORAGE_KEY, value);
+        } catch (e) {}
+      }
+      function applyConsent(value) {
         var granted = value === 'granted';
-        window.gtag('consent', 'update', {
+        var consentState = {
           'ad_storage': granted ? 'granted' : 'denied',
           'analytics_storage': granted ? 'granted' : 'denied',
           'ad_user_data': granted ? 'granted' : 'denied',
           'ad_personalization': granted ? 'granted' : 'denied',
           'wait_for_update': 500
-        });
+        };
+        writeConsent(value);
+        window.gtag('consent', 'update', consentState);
+        window.__sbsConsent = value;
       }
-      applyConsent();
+
+      var state = readConsent();
+      if (state === 'granted') {
+        applyConsent('granted');
+      } else if (state === 'denied') {
+        applyConsent('denied');
+      }
+
+      window.sbsConsent = {
+        getState: function () {
+          return readConsent();
+        },
+        accept: function () {
+          applyConsent('granted');
+          return true;
+        },
+        reject: function () {
+          applyConsent('denied');
+          return false;
+        }
+      };
     })();
   </script>
 <meta charset="UTF-8">
@@ -390,9 +417,11 @@ a{color:var(--blue)}
     var settings = banner.querySelector('.cookie-consent__settings');
 
     function syncBanner() {
-      var state = localStorage.getItem('sbs_consent') || 'unset';
+      var state = window.sbsConsent ? window.sbsConsent.getState() : 'unset';
       banner.classList.toggle('is-visible', state === 'unset');
-      if (settings) settings.hidden = true;
+      if (settings) {
+        settings.hidden = true;
+      }
     }
 
     banner.querySelectorAll('[data-consent]').forEach(function (button) {
@@ -400,20 +429,16 @@ a{color:var(--blue)}
         var choice = button.getAttribute('data-consent');
 
         if (choice === 'settings') {
-          if (settings) settings.hidden = !settings.hidden;
+          if (settings) {
+            settings.hidden = !settings.hidden;
+          }
           return;
         }
 
-        var value = choice === 'granted' ? 'granted' : 'denied';
-        try { localStorage.setItem('sbs_consent', value); } catch (e) {}
-        if (window.gtag) {
-          window.gtag('consent', 'update', {
-            'ad_storage': value === 'granted' ? 'granted' : 'denied',
-            'analytics_storage': value === 'granted' ? 'granted' : 'denied',
-            'ad_user_data': value === 'granted' ? 'granted' : 'denied',
-            'ad_personalization': value === 'granted' ? 'granted' : 'denied',
-            'wait_for_update': 500
-          });
+        if (choice === 'granted' && window.sbsConsent) {
+          window.sbsConsent.accept();
+        } else if (window.sbsConsent) {
+          window.sbsConsent.reject();
         }
         syncBanner();
       });
