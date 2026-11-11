@@ -1953,17 +1953,21 @@ header.hero{ margin-top:0 !important; }
   font: inherit;
   font-weight: 700;
   cursor: pointer;
-  transition: transform .15s ease, opacity .15s ease;
+  transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.14);
 }
-.cookie-btn:hover {
+.cookie-btn:hover,
+.cookie-btn:focus-visible {
   transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.2);
+  outline: none;
 }
 .cookie-btn--primary {
-  background: #f4c95d;
+  background: linear-gradient(135deg, #f4c95d 0%, #f0bf3c 100%);
   color: #121f2d;
 }
 .cookie-btn--ghost {
-  background: transparent;
+  background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.25);
   color: #fff;
 }
