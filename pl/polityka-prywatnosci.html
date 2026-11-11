@@ -160,6 +160,10 @@ a{color:var(--blue)}
   font-size: 1.02rem;
   margin-bottom: 6px;
 }
+.cookie-consent__text a {
+  color: #f4c95d;
+  text-decoration: underline;
+}
 .cookie-consent__text p {
   margin: 0;
   color: rgba(255,255,255,0.8);
@@ -170,6 +174,40 @@ a{color:var(--blue)}
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+}
+.cookie-consent__settings {
+  max-width: 1100px;
+  margin: 14px auto 0;
+  background: rgba(18, 31, 45, 0.78);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 16px 22px;
+  color: #fff;
+}
+.cookie-consent__settings[hidden] {
+  display: none;
+}
+.cookie-consent__settings-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 8px;
+}
+.cookie-consent__settings label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.94rem;
+  color: rgba(255,255,255,0.9);
+}
+.cookie-consent__settings input {
+  accent-color: #f4c95d;
+}
+.cookie-consent__settings p {
+  margin: 0;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 .cookie-btn {
   border: 0;
@@ -203,6 +241,10 @@ a{color:var(--blue)}
   .cookie-btn {
     flex: 1 1 0;
   }
+  .cookie-consent__settings-row {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 </style>
 </head>
@@ -211,12 +253,20 @@ a{color:var(--blue)}
   <div class="cookie-consent__inner">
     <div class="cookie-consent__text">
       <strong>Ta strona używa plików cookie.</strong>
-      <p>Używamy plików cookie do poprawy działania strony i analityki. Wybierz, czy chcesz zaakceptować wszystkie, czy odrzucić dodatkowe pliki cookie.</p>
+      <p>Używamy cookie niezbędnych do działania strony oraz, za Twoją zgodą, cookie analityczne i reklamowe. Przetwarzanie danych odbywa się zgodnie z RODO. Więcej informacji znajdziesz w <a href="polityka-prywatnosci.html">Polityce prywatności</a>.</p>
     </div>
     <div class="cookie-consent__actions">
       <button type="button" class="cookie-btn cookie-btn--ghost" data-consent="denied">Odrzuć</button>
+      <button type="button" class="cookie-btn cookie-btn--ghost" data-consent="settings">Ustawienia</button>
       <button type="button" class="cookie-btn cookie-btn--primary" data-consent="granted">Akceptuję</button>
     </div>
+  </div>
+  <div class="cookie-consent__settings" hidden>
+    <div class="cookie-consent__settings-row">
+      <label><input type="checkbox" checked disabled> Niezbędne</label>
+      <label><input type="checkbox" disabled> Analityczne i reklamowe</label>
+    </div>
+    <p>Wybierając „Akceptuję”, wyrażasz zgodę na cookies analityczne i reklamowe. Możesz zmienić tę decyzję w każdej chwili w ustawieniach przeglądarki lub przez ponowne wywołanie banera cookies.</p>
   </div>
 </div>
 <nav class="site-nav">
@@ -333,14 +383,23 @@ a{color:var(--blue)}
     var banner = document.getElementById('cookieConsent');
     if (!banner) return;
 
+    var settings = banner.querySelector('.cookie-consent__settings');
+
     function syncBanner() {
       var state = localStorage.getItem('sbs_consent') || 'unset';
       banner.classList.toggle('is-visible', state === 'unset');
+      if (settings) settings.hidden = true;
     }
 
     banner.querySelectorAll('[data-consent]').forEach(function (button) {
       button.addEventListener('click', function () {
         var choice = button.getAttribute('data-consent');
+
+        if (choice === 'settings') {
+          if (settings) settings.hidden = !settings.hidden;
+          return;
+        }
+
         var value = choice === 'granted' ? 'granted' : 'denied';
         try { localStorage.setItem('sbs_consent', value); } catch (e) {}
         if (window.gtag) {

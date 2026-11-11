@@ -344,14 +344,23 @@ a{color:var(--blue)}
     var banner = document.getElementById('cookieConsent');
     if (!banner) return;
 
+    var settings = banner.querySelector('.cookie-consent__settings');
+
     function syncBanner() {
       var state = localStorage.getItem('sbs_consent') || 'unset';
       banner.classList.toggle('is-visible', state === 'unset');
+      if (settings) settings.hidden = true;
     }
 
     banner.querySelectorAll('[data-consent]').forEach(function (button) {
       button.addEventListener('click', function () {
         var choice = button.getAttribute('data-consent');
+
+        if (choice === 'settings') {
+          if (settings) settings.hidden = !settings.hidden;
+          return;
+        }
+
         var value = choice === 'granted' ? 'granted' : 'denied';
         try { localStorage.setItem('sbs_consent', value); } catch (e) {}
         if (window.gtag) {

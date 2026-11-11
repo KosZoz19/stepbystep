@@ -1897,6 +1897,10 @@ header.hero{ margin-top:0 !important; }
   font-size: 1.02rem;
   margin-bottom: 6px;
 }
+.cookie-consent__text a {
+  color: #f4c95d;
+  text-decoration: underline;
+}
 .cookie-consent__text p {
   margin: 0;
   color: rgba(255,255,255,0.8);
@@ -1907,6 +1911,40 @@ header.hero{ margin-top:0 !important; }
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+}
+.cookie-consent__settings {
+  max-width: 1100px;
+  margin: 14px auto 0;
+  background: rgba(18, 31, 45, 0.78);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 16px 22px;
+  color: #fff;
+}
+.cookie-consent__settings[hidden] {
+  display: none;
+}
+.cookie-consent__settings-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 8px;
+}
+.cookie-consent__settings label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.94rem;
+  color: rgba(255,255,255,0.9);
+}
+.cookie-consent__settings input {
+  accent-color: #f4c95d;
+}
+.cookie-consent__settings p {
+  margin: 0;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 .cookie-btn {
   border: 0;
@@ -1940,6 +1978,10 @@ header.hero{ margin-top:0 !important; }
   .cookie-btn {
     flex: 1 1 0;
   }
+  .cookie-consent__settings-row {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 
   </style>
@@ -1950,12 +1992,20 @@ header.hero{ margin-top:0 !important; }
   <div class="cookie-consent__inner">
     <div class="cookie-consent__text">
       <strong>Ця сторінка використовує файли cookie.</strong>
-      <p>Ми використовуємо cookie для роботи сайту та аналітики. Виберіть, чи хочете ви прийняти всі cookie чи відхилити додаткові.</p>
+      <p>Ми використовуємо cookie, необхідні для роботи сайту, а також, за Вашої згоди, аналітичні та рекламні. Обробка даних здійснюється відповідно до GDPR/RODO. Докладніше у <a href="polityka-prywatnosci.html">Політиці приватності</a>.</p>
     </div>
     <div class="cookie-consent__actions">
       <button type="button" class="cookie-btn cookie-btn--ghost" data-consent="denied">Відхилити</button>
+      <button type="button" class="cookie-btn cookie-btn--ghost" data-consent="settings">Налаштування</button>
       <button type="button" class="cookie-btn cookie-btn--primary" data-consent="granted">Прийняти</button>
     </div>
+  </div>
+  <div class="cookie-consent__settings" hidden>
+    <div class="cookie-consent__settings-row">
+      <label><input type="checkbox" checked disabled> Необхідні</label>
+      <label><input type="checkbox" disabled> Аналітичні та рекламні</label>
+    </div>
+    <p>Вибравши „Прийняти”, ви даєте згоду на аналітичні та рекламні cookie. Ви можете змінити цей вибір у будь-який момент у налаштуваннях браузера або повторно відкривши банер cookies.</p>
   </div>
 </div>
 <a class="skip-link" href="#top">Перейти до змісту</a>
@@ -2368,14 +2418,27 @@ header.hero{ margin-top:0 !important; }
       return;
     }
 
+    var settings = banner.querySelector('.cookie-consent__settings');
+
     function syncBanner() {
       var state = window.sbsConsent ? window.sbsConsent.getState() : 'unset';
       banner.classList.toggle('is-visible', state === 'unset');
+      if (settings) {
+        settings.hidden = true;
+      }
     }
 
     banner.querySelectorAll('[data-consent]').forEach(function (button) {
       button.addEventListener('click', function () {
         var choice = button.getAttribute('data-consent');
+
+        if (choice === 'settings') {
+          if (settings) {
+            settings.hidden = !settings.hidden;
+          }
+          return;
+        }
+
         if (choice === 'granted' && window.sbsConsent) {
           window.sbsConsent.accept();
         } else if (window.sbsConsent) {
