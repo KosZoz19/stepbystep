@@ -1640,10 +1640,12 @@ html{ scroll-behavior:smooth; }
 
 /* --- Герой під новим меню --- */
 .hero{ padding-top:34px; }
-.hero-logo{ margin-top:0; margin-bottom:34px; max-width:260px; }
+.hero-logo{ margin-top:0; margin-bottom:24px; max-width:240px; }
+.hero .cta-section{ margin:24px auto 16px; }
 @media (max-width:600px){
   .hero{ padding:24px 14px 26px; }
-  .hero-logo{ max-width:170px; margin-top:0; margin-bottom:22px; }
+  .hero-logo{ max-width:170px; margin-top:0; margin-bottom:16px; }
+  .hero .cta-section{ margin:18px auto 12px; }
 }
 
   
@@ -1987,6 +1989,108 @@ header.hero{ margin-top:0 !important; }
     gap: 10px;
   }
 }
+.adult-course-layout {
+  display: grid;
+  gap: 28px;
+  margin-bottom: 40px;
+}
+.adult-course-photo {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 32vw, 360px);
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+}
+.adult-course-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.adult-course-cards > div {
+  display: flex;
+  flex-direction: column;
+}
+.level-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 25, 45, 0.65);
+}
+.level-modal.is-open {
+  display: flex;
+}
+.level-modal__dialog {
+  box-sizing: border-box;
+  width: min(100%, 680px);
+  max-height: 90vh;
+  overflow: auto;
+  padding: 28px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+.level-modal__close {
+  float: right;
+  border: 0;
+  background: transparent;
+  color: #4d5a72;
+  font-size: 28px;
+  cursor: pointer;
+}
+.level-test-question {
+  margin: 0 0 16px;
+  padding: 14px;
+  border: 1px solid #e6eaf2;
+  border-radius: 12px;
+}
+.level-test-question legend {
+  padding: 0 4px;
+  color: #18243b;
+  font-weight: 700;
+}
+.level-test-question label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
+  color: #4d5a72;
+  cursor: pointer;
+}
+.level-test-question input {
+  accent-color: #1749c3;
+}
+.level-test-result {
+  display: none;
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f7f8fb;
+  color: #18243b;
+}
+.level-test-result.is-visible {
+  display: block;
+}
+.adult-actions__primary {
+  width: 100%;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 10px;
+  background: #1749c3;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+@media (max-width: 700px) {
+  .adult-course-cards {
+    grid-template-columns: 1fr;
+  }
+}
 
   </style>
 </head>
@@ -2022,6 +2126,7 @@ header.hero{ margin-top:0 !important; }
     <button class="nav-toggle" id="navToggle" type="button"
             aria-label="Головне меню" aria-expanded="false" aria-controls="navLinks">&#9776;</button>
     <div class="nav-links" id="navLinks">
+        <a href="#adult-enrollment">Англійська для дорослих</a>
         <a href="#offers">Курси</a>
         <a href="#stepiky">Методика</a>
         <a href="#about">Про нас</a>
@@ -2048,11 +2153,203 @@ header.hero{ margin-top:0 !important; }
     </button>
   </section>
 </header>
+
+<!-- Adult English Enrollment Campaign -->
+<section id="adult-enrollment" style="padding: 50px 20px; background: #f7f8fb; max-width: 1150px; margin: 40px auto; border-radius: 20px; border: 1px solid #e6eaf2;">
+  <div style="text-align: center; margin-bottom: 40px;">
+    <p style="color: #1749c3; font-size: 13px; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase;">Набір — початок 4 грудня 2026</p>
+    <h2 style="font-size: 2rem; font-weight: 800; color: #18243b; margin: 10px 0;">Англійська для дорослих — рівні A1 і A2</h2>
+    <p style="color: #4d5a72; font-size: 16px; max-width: 600px; margin: 0 auto;">Говоріть англійською з перших занять. Практичні розмови. Реальні ситуації. Більше впевненості в собі.</p>
+    <div style="display:flex; flex-direction:column; gap:10px; margin-top:16px; padding:14px 18px; border-radius:var(--r-md); background:linear-gradient(112deg,#fff3a6 0%,#ffd84d 100%); color:#0a2a6b;">
+      <div style="font-size:13px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; text-align:center;">До початку курсу:</div>
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:2px; background:rgba(255,255,255,.5); padding:8px 12px; border-radius:10px;"><span style="font-family:Montserrat,sans-serif; font-size:20px; font-weight:800;" id="cd-days">00</span><span style="font-size:11px; font-weight:600; opacity:.85;">днів</span></div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:2px; background:rgba(255,255,255,.5); padding:8px 12px; border-radius:10px;"><span style="font-family:Montserrat,sans-serif; font-size:20px; font-weight:800;" id="cd-hours">00</span><span style="font-size:11px; font-weight:600; opacity:.85;">годин</span></div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:2px; background:rgba(255,255,255,.5); padding:8px 12px; border-radius:10px;"><span style="font-family:Montserrat,sans-serif; font-size:20px; font-weight:800;" id="cd-mins">00</span><span style="font-size:11px; font-weight:600; opacity:.85;">хвилин</span></div>
+        <div style="display:flex; flex-direction:column; align-items:center; gap:2px; background:rgba(255,255,255,.5); padding:8px 12px; border-radius:10px;"><span style="font-family:Montserrat,sans-serif; font-size:20px; font-weight:800;" id="cd-secs">00</span><span style="font-size:11px; font-weight:600; opacity:.85;">секунд</span></div>
+      </div>
+    </div>
+  </div>
+  <div style="margin:0 0 32px; padding:24px; border:1px solid #e6eaf2; border-radius:16px; background:#fff;">
+    <div style="text-align:center; margin-bottom:20px;">
+      <h3 style="margin:0 0 6px; color:#18243b; font-size:22px; font-weight:800;">Наш метод</h3>
+      <p style="margin:0; color:#4d5a72; font-size:17px; font-weight:700;">Менше теорії. Більше говоріння.</p>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:16px;">
+      <div style="flex:1 1 270px; padding:18px; border-radius:12px; background:#f7f8fb;">
+        <p style="margin:0 0 8px; color:#102b68; font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;">Комунікативний підхід</p>
+        <p style="margin:0; color:#4d5a72; font-size:14px; line-height:1.7;">Ви розмовляєте з перших занять. Граматику одразу використовуєте в діалогах і життєвих ситуаціях.</p>
+      </div>
+      <div style="flex:1 1 270px; padding:18px; border-radius:12px; background:#f7f8fb;">
+        <p style="margin:0 0 8px; color:#102b68; font-size:13px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;">Навчання через завдання</p>
+        <p style="margin:0; color:#4d5a72; font-size:14px; line-height:1.7;">Виконуєте практичні завдання: бронюєте готель, замовляєте їжу та запитуєте дорогу.</p>
+      </div>
+    </div>
+    <p style="margin:16px 0 0; color:#4d5a72; font-size:13px; line-height:1.6; text-align:center;">Мала група 5–7 осіб &bull; Матеріали відповідно до рівня &bull; Конкретний результат кожного заняття</p>
+  </div>
+  <div class="level-modal" id="level-modal" role="dialog" aria-modal="true" aria-labelledby="level-test-title">
+    <div class="level-modal__dialog">
+      <button type="button" class="level-modal__close" id="level-modal-close" aria-label="Закрити тест">&times;</button>
+      <h2 id="level-test-title" style="margin:0 40px 8px 0; color:#18243b; font-size:24px;">Тест на визначення рівня A1–A2</h2>
+      <p style="margin:0 0 18px; color:#4d5a72; line-height:1.6;">Оберіть одну відповідь у кожному запитанні. Результат тесту орієнтовний.</p>
+      <form id="level-test-form">
+        <fieldset class="level-test-question">
+          <legend>1. She ___ coffee every morning.</legend>
+          <label><input type="radio" name="q1" value="0" required> drink</label>
+          <label><input type="radio" name="q1" value="1"> drinks</label>
+          <label><input type="radio" name="q1" value="0"> drinking</label>
+        </fieldset>
+        <fieldset class="level-test-question">
+          <legend>2. There ___ a book on the table.</legend>
+          <label><input type="radio" name="q2" value="1" required> is</label>
+          <label><input type="radio" name="q2" value="0"> are</label>
+          <label><input type="radio" name="q2" value="0"> be</label>
+        </fieldset>
+        <fieldset class="level-test-question">
+          <legend>3. We ___ to the cinema last night.</legend>
+          <label><input type="radio" name="q3" value="0" required> go</label>
+          <label><input type="radio" name="q3" value="1"> went</label>
+          <label><input type="radio" name="q3" value="0"> have gone</label>
+        </fieldset>
+        <fieldset class="level-test-question">
+          <legend>4. I have never ___ sushi.</legend>
+          <label><input type="radio" name="q4" value="0" required> eat</label>
+          <label><input type="radio" name="q4" value="0"> ate</label>
+          <label><input type="radio" name="q4" value="1"> eaten</label>
+        </fieldset>
+        <fieldset class="level-test-question">
+          <legend>5. When I called, they ___ dinner.</legend>
+          <label><input type="radio" name="q5" value="1" required> were having</label>
+          <label><input type="radio" name="q5" value="0"> have</label>
+          <label><input type="radio" name="q5" value="0"> had</label>
+        </fieldset>
+        <button type="submit" class="adult-actions__primary">Показати результат і рекомендований курс</button>
+        <div id="level-test-result" class="level-test-result" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+  <div class="adult-course-layout">
+    <div>
+      <img class="adult-course-photo" src="../adult-english-class.png" alt="Студенти курсу англійської для дорослих на занятті">
+    </div>
+    <div>
+      <div class="adult-course-cards">
+        <div style="padding: 26px; border: 1px solid #e6eaf2; border-radius: 14px; background: #fff;">
+          <div style="display: inline-block; padding: 6px 12px; border-radius: 999px; background: #eef3ff; color: #102b68; font-size: 12px; font-weight: 800; margin-bottom: 14px; letter-spacing: 0.08em; text-transform: uppercase;">A1 · Від основ</div>
+          <h3 style="font-size: 20px; font-weight: 800; color: #18243b; margin: 0 0 10px; line-height: 1.3;">A1 — від основ</h3>
+          <p style="color: #4d5a72; font-size: 15px; line-height: 1.75; margin: 0 0 16px;">Від першої фрази до розмови. Вивчіть основи та англійську, якою користуватиметеся в реальному житті.</p>
+          <div style="margin-bottom:18px; color:#4d5a72; font-size:14px; line-height:1.65;">
+            <p style="margin:0 0 8px; font-size:13px; font-weight:800; color:#102b68; text-transform:uppercase; letter-spacing:0.08em;">Граматика</p>
+            <p style="margin:0 0 8px;"><strong>Основи мови:</strong> To be, числівники, однина і множина; A/an; питання і заперечення; прийменники місця й часу; can.</p>
+            <p style="margin:0 0 8px;"><strong>Теперішні часи:</strong> Present Simple, Present Continuous.</p>
+            <p style="margin:0 0 8px;"><strong>Минулий час:</strong> Past Simple.</p>
+            <p style="margin:0 0 8px;"><strong>Структури та розвиток мовлення:</strong> There is/are, there was/were; gerund та infinitive; злічувані й незлічувані іменники; some/any, how much/many, a lot of; ступені порівняння прикметників.</p>
+            <p style="margin:0 0 14px;"><strong>Майбутнє та досвід:</strong> to be going to, Future Simple, Present Perfect.</p>
+            <p style="margin:0 0 8px; font-size:13px; font-weight:800; color:#102b68; text-transform:uppercase; letter-spacing:0.08em;">Словниковий запас і мовлення</p>
+            <ul style="list-style:none; padding:0; margin:0;">
+              <li style="margin-bottom:6px;">✔ <strong>Подорожі:</strong> аеропорт, вокзал, громадський транспорт, таксі.</li>
+              <li style="margin-bottom:6px;">✔ <strong>У місті:</strong> запитати дорогу, магазин і покупки.</li>
+              <li style="margin-bottom:6px;">✔ <strong>Їжа та проживання:</strong> кафе, ресторан, готель і реєстрація.</li>
+              <li>✔ <strong>Щоденні розмови:</strong> знайомство, small talk, робота, плани та вільний час.</li>
+            </ul>
+          </div>
+          <div style="margin-top:auto;">
+            <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+              <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border: 1px solid #d5dceb; border-radius: 999px; background: #f7f8fb; color: #4d5a72; font-size: 12px; font-weight: 700;">Понеділок 18:00</span>
+              <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border: 1px solid #d5dceb; border-radius: 999px; background: #f7f8fb; color: #4d5a72; font-size: 12px; font-weight: 700;"> або П’ятниця 19:00</span>
+            </div>
+            <p style="margin: 0 0 12px; color: #4d5a72; font-size: 14px;"><strong>Старт: 4 грудня 2026</strong></p>
+          </div>
+          <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" style="width: 100%; padding: 14px; border: 0; border-radius: 10px; background: #1749c3; color: #fff; font-family: Montserrat, sans-serif; font-size: 15px; font-weight: 700; cursor: pointer;">Записатися на A1</button>
+        </div>
+        <div style="padding: 26px; border: 1px solid #e6eaf2; border-radius: 14px; background: #fff;">
+          <div style="display: inline-block; padding: 6px 12px; border-radius: 999px; background: #fff6d9; color: #102b68; font-size: 12px; font-weight: 800; margin-bottom: 14px; letter-spacing: 0.08em; text-transform: uppercase;">A2 · Продовження</div>
+          <h3 style="font-size: 20px; font-weight: 800; color: #18243b; margin: 0 0 10px; line-height: 1.3;">A2 — продовження</h3>
+          <p style="color: #4d5a72; font-size: 15px; line-height: 1.75; margin: 0 0 16px;">Розвивайте плавність і впевненість.</p>
+          <div style="margin-bottom:18px; color:#4d5a72; font-size:14px; line-height:1.65;">
+            <p style="margin:0 0 8px; font-size:13px; font-weight:800; color:#102b68; text-transform:uppercase; letter-spacing:0.08em;">Граматика</p>
+            <p style="margin:0 0 8px;"><strong>Теперішні часи:</strong> Present Simple і Present Continuous на практиці.</p>
+            <p style="margin:0 0 8px;"><strong>Минулий час:</strong> Past Simple і Past Continuous.</p>
+            <p style="margin:0 0 8px;"><strong>Досвід і зміни:</strong> Present Perfect.</p>
+            <p style="margin:0 0 8px;"><strong>Плани та передбачення.</strong></p>
+            <p style="margin:0 0 14px;"><strong>Інші теми:</strong> ступені порівняння та модальні дієслова.</p>
+            <p style="margin:0 0 8px; font-size:13px; font-weight:800; color:#102b68; text-transform:uppercase; letter-spacing:0.08em;">Словниковий запас і мовлення</p>
+            <ul style="list-style:none; padding:0; margin:0;">
+              <li style="margin-bottom:6px;">✔ Подорожі, бронювання та проблеми в готелі.</li>
+              <li style="margin-bottom:6px;">✔ Робота, зустрічі та обов’язки.</li>
+              <li style="margin-bottom:6px;">✔ Здоров’я, послуги, покупки та ресторани.</li>
+              <li style="margin-bottom:6px;">✔ Історії, досвід і думки.</li>
+              <li>✔ Прохання, пояснення та реакція.</li>
+            </ul>
+          </div>
+          <ul style="list-style: none; padding: 0; margin: 0 0 18px;">
+            <li style="display: flex; gap: 10px; color: #18243b; font-size: 14px; margin-bottom: 8px;"><span style="color: #1749c3; font-weight: 900;">✔</span> Результат: довші розмови, розповіді про події та вирішення повсякденних ситуацій.</li>
+          </ul>
+          <div style="margin-top:auto;">
+            <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+              <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border: 1px solid #d5dceb; border-radius: 999px; background: #f7f8fb; color: #4d5a72; font-size: 12px; font-weight: 700;">Середа 18:00</span>
+              <span style="display: inline-flex; align-items: center; gap: 5px; padding: 5px 10px; border: 1px solid #d5dceb; border-radius: 999px; background: #f7f8fb; color: #4d5a72; font-size: 12px; font-weight: 700;"> або Субота 11:00</span>
+            </div>
+            <p style="margin: 0 0 12px; color: #4d5a72; font-size: 14px;"><strong>Старт: 5 грудня 2026</strong></p>
+          </div>
+          <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})" style="width: 100%; padding: 14px; border: 0; border-radius: 10px; background: #1749c3; color: #fff; font-family: Montserrat, sans-serif; font-size: 15px; font-weight: 700; cursor: pointer;">Записатися на A2</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin:0 0 32px; text-align:center;">
+    <p style="margin:0 0 12px; color:#18243b; font-size:17px; font-weight:700;">Не знаєте, який рівень обрати?</p>
+    <button type="button" class="adult-actions__primary" id="open-level-test" style="max-width:360px;">Пройдіть короткий тест на рівень</button>
+  </div>
+  <div style="padding: 28px; border-radius: 20px; background: linear-gradient(112deg, #f7f8fc 0%, #fbf7ec 100%); margin-bottom: 24px;">
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;">
+      <div style="color: #4d5a72;"><div style="font-family: Montserrat, sans-serif; font-size: 24px; font-weight: 800; color: #1749c3;">2×</div><div style="font-size: 12.5px; font-weight: 600;">на тиждень</div></div>
+      <div style="color: #4d5a72;"><div style="font-family: Montserrat, sans-serif; font-size: 24px; font-weight: 800; color: #1749c3;">90 хв</div><div style="font-size: 12.5px; font-weight: 600;">на заняття</div></div>
+      <div style="color: #4d5a72;"><div style="font-family: Montserrat, sans-serif; font-size: 24px; font-weight: 800; color: #1749c3;">5–7 осіб</div><div style="font-size: 12.5px; font-weight: 600;">у групі</div></div>
+      <div style="color: #4d5a72;"><div style="font-family: Montserrat, sans-serif; font-size: 24px; font-weight: 800; color: #1749c3;">5 міс.</div><div style="font-size: 12.5px; font-weight: 600;">тривання курсу</div></div>
+    </div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+      <div style="padding: 22px; border: 1px solid #e6eaf2; border-radius: 14px; background: #fff;">
+        <div style="margin: 0 0 8px; font-size: 17px; font-weight: 800; color: #18243b;">Оплата місячно</div>
+        <div style="font-family: Montserrat, sans-serif; font-size: 26px; font-weight: 800; color: #18243b; letter-spacing: -0.02em;">440 zł <span style="font-size: 14px; font-weight: 600; color: #6b7789;">/ місяць</span></div>
+      </div>
+      <div style="padding: 22px; border: 2px solid #f4c84a; border-radius: 14px; background: #fff;">
+        <div style="display: inline-block; padding: 4px 10px; border-radius: 999px; background: #fff6d9; color: #102b68; font-size: 11.5px; font-weight: 800; margin-bottom: 10px;">Економія 150 zł</div>
+        <div style="margin: 0 0 8px; font-size: 17px; font-weight: 800; color: #18243b;">Весь курс відразу</div>
+        <div style="font-family: Montserrat, sans-serif; font-size: 26px; font-weight: 800; color: #18243b; letter-spacing: -0.02em;">2050 zł <span style="font-size: 14px; font-weight: 600; color: #6b7789;">за весь курс</span></div>
+        <p style="margin: 8px 0 0; color: #6b7789; font-size: 13px;">Оплачуйте раз і економіть</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var target = new Date('2026-12-04T00:00:00').getTime();
+  var els = { days: document.getElementById('cd-days'), hours: document.getElementById('cd-hours'), mins: document.getElementById('cd-mins'), secs: document.getElementById('cd-secs') };
+  function update(){
+    var now = new Date().getTime();
+    var diff = target - now;
+    if (diff < 0) diff = 0;
+    var d = Math.floor(diff / (1000*60*60*24));
+    var h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    var m = Math.floor((diff % (1000*60*60)) / (1000*60));
+    var s = Math.floor((diff % (1000*60)) / 1000);
+    if (els.days) els.days.textContent = String(d).padStart(2,'0');
+    if (els.hours) els.hours.textContent = String(h).padStart(2,'0');
+    if (els.mins) els.mins.textContent = String(m).padStart(2,'0');
+    if (els.secs) els.secs.textContent = String(s).padStart(2,'0');
+  }
+  update();
+  setInterval(update, 1000);
+})();
+</script>
+
 <!-- Вступ -->
 <section id="intro-section" class="intro-section" data-aos="fade-up">
   <div class="intro-content">
    <div class="intro-image-top">
-  <img class="intro-photo" src="students-high-fiving-in-classroom-WF2014064.png" 
+  <img class="intro-photo" src="../students-high-fiving-in-classroom-WF2014064.png"
        alt="Учні Step by Step на уроці">
 </div>
     <div class="intro-text">
@@ -2114,6 +2411,7 @@ header.hero{ margin-top:0 !important; }
       <h3>🧑‍💼 Англійська для дорослих (A1–B1)</h3>
       <p>Гнучкий підхід, приємна атмосфера, акцент на практику. Почни говорити впевнено!</p>
       <p class="price">💰 2×90 хв/тиждень — 440 zł/міс, пакет учня — 410 zł</p>
+      <p><a href="#adult-enrollment" style="font-weight:800;color:#0a2a6b">Переглянути актуальний набір A1–A2 →</a></p>
     </div>
 
     <div class="offer is-yellow">
@@ -2140,6 +2438,7 @@ header.hero{ margin-top:0 !important; }
   </button>
   <div class="cta-mid__note">⌛ Місць обмежено</div>
 </section>
+
 <section id="stepiky" style="background: linear-gradient(135deg, #FFD600, #FFEA80); padding: 60px 20px; color: #000;" data-aos="fade-up">
   <div style="margin: auto; text-align: center;">
     <h2 style="font-size: 2rem; font-weight: bold; margin-bottom: 20px;">🎯 Мотиваційна система <span style="color: #0044AA;">Stepiky</span></h2>
@@ -2464,6 +2763,47 @@ header.hero{ margin-top:0 !important; }
   });
 </script>
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script> 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var modal = document.getElementById('level-modal');
+    var openButton = document.getElementById('open-level-test');
+    var closeButton = document.getElementById('level-modal-close');
+    var testForm = document.getElementById('level-test-form');
+    var result = document.getElementById('level-test-result');
+    function closeModal() {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    if (openButton && modal) {
+      openButton.addEventListener('click', function () {
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        closeButton.focus();
+      });
+      closeButton.addEventListener('click', closeModal);
+      modal.addEventListener('click', function (event) { if (event.target === modal) closeModal(); });
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+      });
+    }
+    if (testForm) {
+      testForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var score = 0;
+        testForm.querySelectorAll('input[type="radio"]:checked').forEach(function (input) { score += Number(input.value); });
+        var level = score <= 2 ? 'A1 — початковий рівень' : 'A2 — продовження';
+        var contactMessage = document.getElementById('cf-message');
+        if (contactMessage) contactMessage.value = 'Хочу записатися на курс англійської для дорослих. Результат тесту: ' + level + '.';
+        result.innerHTML = '<strong>Результат: ' + score + '/5</strong><p>Рекомендований курс: ' + level + '.</p><p>' + (score <= 2 ? 'Почнемо з міцних основ і практичних розмов.' : 'Розвиватимемо впевненість і плавність на базі A1.') + '</p><button type="button" class="adult-actions__primary" id="level-go-to-form">Залишити заявку</button>';
+        result.classList.add('is-visible');
+        document.getElementById('level-go-to-form').addEventListener('click', function () {
+          closeModal();
+          document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    }
+  });
+</script>
 <script defer>
 window.addEventListener('DOMContentLoaded', () => {
   // ---- helpers ----
